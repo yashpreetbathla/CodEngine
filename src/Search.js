@@ -35,7 +35,7 @@ componentDidMount(){
     <h3>Click on search icon, then type your keyword.</h3>
     <div>
        
-      <input type="text" placeholder="       Search . . ." required  />
+      <input  type="text" placeholder="       Search . . ." required  />
     </div>
   </div>
 </div>
