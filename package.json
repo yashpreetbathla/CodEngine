@@ -6,9 +6,21 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "bootstrap": "^4.4.1",
+    "chalk": "^3.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "query-string": "^6.11.1",
     "react": "^16.13.0",
+    "react-autocomplete-input": "^1.0.12",
+    "react-bootstrap": "^1.0.0-beta.17",
     "react-dom": "^16.13.0",
-    "react-scripts": "3.4.0"
+    "react-native-paper": "^3.6.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0",
+    "tachyons": "^4.11.1"
   },
   "scripts": {
     "start": "react-scripts start",
