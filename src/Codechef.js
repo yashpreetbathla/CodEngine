@@ -4,6 +4,7 @@ import Contest from './Contest';
 import Search from './Search';
 import Auth from './Auth';
 import NewSearch from './NewSearch';
+import FinalSearch from './FinalSearch';
 import {BrowserRouter,Route,Switch,withRouter } from 'react-router-dom';
 import AutoCompleteText from './AutoCompleteText';
 
@@ -16,8 +17,8 @@ class Codechef extends Component {
             <BrowserRouter>
             <div>
                 <Switch>
-                    <NewSearch/>
-
+                    {/* <NewSearch/> */}
+            <FinalSearch/>
                     {/* <AutoCompleteText/> */}
             {/* <Login /> */}
             {/* <Route path="/" exact component={Login}/>
