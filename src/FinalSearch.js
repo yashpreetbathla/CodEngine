@@ -52,7 +52,7 @@ onTextChanged=(e)=>{
         suggestions:[],
       }));
     }else{
-      const regex = new RegExp(`^${value}`,`i`);
+        const regex = new RegExp(`^${value}`, 'i');
       const suggestions = this.items.sort().filter(v=>regex.test(v));
       this.setState(()=>({suggestions, text:value}));
     }
