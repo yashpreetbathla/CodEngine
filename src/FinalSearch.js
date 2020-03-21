@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Search.css';
+import './FinalSearch.css';
 import {withRouter} from 'react-router-dom';
 import queryString from 'query-string';
 class FinalSearch extends Component {
