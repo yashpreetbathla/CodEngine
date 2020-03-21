@@ -47,15 +47,15 @@ class FinalSearch extends Component {
 }
 onTextChanged=(e)=>{
     const value = e.target.value;
-    if(value.length === 0){
-      this.setState(()=>({
-        suggestions:[],
-      }));
-    }else{
+    let suggestions=[];
+    if(value.length>0){
         const regex = new RegExp(`^${value}`, 'i');
-      const suggestions = this.items.sort().filter(v=>regex.test(v));
-      this.setState(()=>({suggestions, text:value}));
+    suggestions = this.items.sort().filter(v=>regex.test(v));
     }
+    
+     
+      this.setState(()=>({suggestions, text:value}));
+    
   }
   renderSuggestions(){
     const {suggestions} = this.state;
