@@ -16,7 +16,7 @@ componentDidMount() {
      fetch('https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder', {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer f6c44a8c2b77da3f8ae35d5a523e69f268794ee1'
+        'Authorization': 'Bearer 29e024b555a52f822db45dbbcb94d49d367f0faf'
     },
     method: 'GET'
 })

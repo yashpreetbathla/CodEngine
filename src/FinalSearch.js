@@ -3,6 +3,8 @@ import './FinalSearch.css';
 import {withRouter} from 'react-router-dom';
 import queryString from 'query-string';
 class FinalSearch extends Component {
+  idMap = {};
+  items = [];
   constructor(props){
     
     super(props);
@@ -10,7 +12,7 @@ class FinalSearch extends Component {
     fetch('https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder', {
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer a90774c2d8db3a7a03e971c8f8ca3cd660225444'
+          'Authorization': 'Bearer 42cbc7674a0a6784c11996b3cc5eca2594928938'
       },
       method: 'GET'
   })
@@ -18,8 +20,8 @@ class FinalSearch extends Component {
           return res.json();
       })
       .then(res => {
+      
           console.log(res);
-          this.setState({questions: res});
          response = res.result;
          var parsedjson =  JSON.parse(JSON.stringify(response));
   // alert(parsedjson);
@@ -28,6 +30,14 @@ class FinalSearch extends Component {
   var getName = parsedjson['data']['content']['contestList'].map(val => val.name)
   var getNameCode = getCode.concat(getName);
   this.items = getNameCode;
+  var getNameCode = getCode.concat(getName);
+  console.log(this.items);
+  for(let x of parsedjson['data']['content']['contestList']){
+    this.idMap[x.name] = x.code
+    this.idMap[x.code] = x.code
+  }
+  console.log(this.idMap);
+  this.setState({mapping: this.idMap});
   var getStartDate = parsedjson['data']['content']['contestList'].map(val => val.startDate)
   var getEndDate = parsedjson['data']['content']['contestList'].map(val => val.endDate)
 
@@ -37,26 +47,28 @@ class FinalSearch extends Component {
           console.error(err)
       });
     
-    console.log(this.items);
+    // console.log(this.items);
     this.state={
       suggestions:[],
       text:'', 
       code:'' ,
+      mapping:{},
+      FC:''
     };
   
 }
 onTextChanged=(e)=>{
-    const value = e.target.value;
-    let suggestions=[];
-    if(value.length>0){
-        const regex = new RegExp(`^${value}`, 'i');
-    suggestions = this.items.sort().filter(v=>regex.test(v));
-    }
-    
-     
-      this.setState(()=>({suggestions, text:value}));
-    
+  const value = e.target.value;
+  if(value.length === 0){
+    this.setState(()=>({
+      suggestions:[],
+    }));
+  }else{
+    const regex = new RegExp(`^${value}`,`i`);
+    const suggestions = this.items.sort().filter(v=>regex.test(v));
+    this.setState(()=>({suggestions, text:value}));
   }
+}
   renderSuggestions(){
     const {suggestions} = this.state;
     if(suggestions.length === 0){
@@ -84,20 +96,31 @@ componentDidMount(){
   this.setState({ code: Code });
  
 }
+
+setText(value){
+console.log(value);
+
+console.log(this.idMap[value.text]);
+var v = this.idMap[value.text];
+this.state.FC = v;
+}
+
     render() {
         const {text} = this.state;
         return (  
             <div>
            <div> <h1>{this.state.code}</h1>  </div>
-                <div class="flexbox">
+                <div className="flexbox">
                   
-  <div className="search">
+  <div className = "search">
     <h1>Search Contest</h1>
     <h3>Click on search icon, then type your keyword.</h3>
     <div>
        
     <input value={text} onChange ={this.onTextChanged} type="text" placeholder="       Search . . ." required  />
       {this.renderSuggestions()}
+     <p> {this.setText({text})}</p>
+        <p>{this.state.FC}</p>
     </div>
   </div>
 </div>

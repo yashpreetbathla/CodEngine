@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './Contest.css';
 class Contest extends Component {
     
