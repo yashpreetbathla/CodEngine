@@ -11,11 +11,12 @@ CC='1';
   constructor(props){
     
     super(props);
+    
     let response;
     fetch('https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder', {
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer 3aabe6bbc9455230ece95a2b9ec88a454508096a'
+          'Authorization': 'Bearer 712220e6c70ab20f1815426d3d22d6286653f246'
       },
       method: 'GET'
   })
@@ -72,14 +73,20 @@ onTextChanged=(e)=>{
     this.setState(()=>({suggestions, text:value}))  ;
   }
 }
+
   renderSuggestions(){
     const {suggestions} = this.state;
     if(suggestions.length === 0){
     return null;
     }
+    var x=this.CC;
+    const newTo = { 
+      pathname: "/contest/" + x, 
+      param1: this.CC 
+    };
     return (
         <ul>
-          {suggestions.map((item)=><li onClick={()=>this.suggestionSelected(item)}  > <Link to= {"/contest/"+this.CC} >  {item} </Link> </li>)}
+          {suggestions.map((item)=><li onClick={()=>this.suggestionSelected(item)}  >   {item}  </li>)}
         </ul>
     ) 
   }
@@ -110,7 +117,12 @@ this.CC = this.state.FC;
 console.log("HEY")
 console.log(this.CC);
 }
-
+isDisabled() {
+  //logic to define if button should be disabled or not
+  //return boolean true or false based on that
+  // return this.state.FC < 0;
+  return this.state.FC;
+}
     render() {
         const {text} = this.state;
         return (  
@@ -124,12 +136,18 @@ console.log(this.CC);
     <div>
        
     <input value={text} onChange ={this.onTextChanged} type="text" placeholder="       Search . . ." required  />
-
+    {/* <input type="button" value="Search"/> */}
       {this.renderSuggestions()}
      <p> {this.setText({text})}</p>
-        <p>{this.state.FC}</p>
+          
+        {/* <p>{this.state.FC}</p> */}
+        <div>
+        {this.isDisabled()?<button type="submit"  
+         disabled={this.isDisabled()}><Link to= {"/contest/"+ this.state.FC } >CLICKK MEEEE</Link></button>:<button type="submit"  
+         disabled={this.isDisabled()}><Link  >CLICKK MEEEE</Link></button>}
         
         {/* <Contest text = {this.state.FC} /> */}
+        </div>
     </div>
   </div>
 </div>

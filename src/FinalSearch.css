@@ -85,3 +85,25 @@ html, body {
 .search > div > input:valid {
   width: 250px;
 }
+
+body {
+  background-color: #8ebf42;
+  }
+  form {
+  width:400px;
+  margin:auto;
+  margin-top: 250px;
+  }
+  input{
+  padding:4px 10px;
+  border:0;
+  font-size:16px;
+  }
+  .search {
+  width: 75%;
+  }
+  .submit{
+  width: 70px;
+  background-color: #1c87c9;
+  color:#ffffff;
+  }

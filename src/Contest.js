@@ -6,11 +6,12 @@ class Contest extends Component {
       super(props);
       console.log(this);
       console.log('HII');
-      // console.log(props.text);
+      console.log(this.props.location.param1 );
     }
     render() { 
         return (
             <div>
+              <h1>{this.props.location.param1 }</h1>
                 <h1 style={{alignSelf :"center"}}>  Farji CodeChef</h1>
                <div className="header">
   <h1 style={{color:"purple"}}>My Website</h1>
