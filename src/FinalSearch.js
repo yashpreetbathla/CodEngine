@@ -16,7 +16,7 @@ CC='1';
     fetch('https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder', {
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer 712220e6c70ab20f1815426d3d22d6286653f246'
+          'Authorization': 'Bearer a1a89425454ad6240347ed0ed3532d7d515e754f'
       },
       method: 'GET'
   })
@@ -127,7 +127,7 @@ isDisabled() {
         const {text} = this.state;
         return (  
             <div>
-           <div> <h1>{this.state.code}</h1>  </div>
+           {/* <div> <h1>{this.state.code}</h1>  </div> */}
                 <div className="flexbox">
                   
   <div className = "search">

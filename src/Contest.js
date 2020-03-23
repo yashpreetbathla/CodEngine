@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-
+// import {withRouter,useParams} from 'react-router-dom';
+import { RouteComponentProps, withRouter } from "react-router";
+import queryString from 'query-string';
 import './Contest.css';
 class Contest extends Component {
     constructor(props){
@@ -7,12 +9,19 @@ class Contest extends Component {
       console.log(this);
       console.log('HII');
       console.log(this.props.location.param1 );
+      var v=window.location.pathname;
+      // alert(v);
+      var res = v.substring(9, v.length);
+      this.state = {
+        val: res,
+      };
     }
+   
     render() { 
         return (
             <div>
-              <h1>{this.props.location.param1 }</h1>
-                <h1 style={{alignSelf :"center"}}>  Farji CodeChef</h1>
+            <h1>{this.state.val}</h1>
+                <h1 style = {{alignSelf :"center"}}>  Farji CodeChef</h1>
                <div className="header">
   <h1 style={{color:"purple"}}>My Website</h1>
   <p>Resize the browser window to see the effect.</p>
@@ -61,4 +70,4 @@ class Contest extends Component {
     }
 }
  
-export default Contest;
+export default withRouter(Contest);

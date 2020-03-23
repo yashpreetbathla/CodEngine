@@ -19,11 +19,11 @@ class Codechef extends Component {
                 <Switch>
                     {/* <NewSearch/> */}
         
-            <Route path="/" exact component={FinalSearch}/> 
+            {/* <Route path="/" exact component={FinalSearch}/>  */}
                     {/* <AutoCompleteText/> */}
             {/* <Login /> */}
-            {/* <Route path="/" exact component={Login}/>
-            <Route path="/search" exact component={Search}/> */}
+            <Route path="/" exact component={Login}/>
+            <Route path="/search" exact component={FinalSearch}/>
 
            <Route path={"/contest/:id"} component={Contest}/>
            
