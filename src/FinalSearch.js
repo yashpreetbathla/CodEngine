@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import './FinalSearch.css';
 import {withRouter} from 'react-router-dom';
 import queryString from 'query-string';
+import Contest from './Contest';
+import {Link} from 'react-router-dom';
 class FinalSearch extends Component {
   idMap = {};
   items = [];
+CC='1';
   constructor(props){
     
     super(props);
@@ -12,7 +15,7 @@ class FinalSearch extends Component {
     fetch('https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder', {
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer 42cbc7674a0a6784c11996b3cc5eca2594928938'
+          'Authorization': 'Bearer 3aabe6bbc9455230ece95a2b9ec88a454508096a'
       },
       method: 'GET'
   })
@@ -66,7 +69,7 @@ onTextChanged=(e)=>{
   }else{
     const regex = new RegExp(`^${value}`,`i`);
     const suggestions = this.items.sort().filter(v=>regex.test(v));
-    this.setState(()=>({suggestions, text:value}));
+    this.setState(()=>({suggestions, text:value}))  ;
   }
 }
   renderSuggestions(){
@@ -76,7 +79,7 @@ onTextChanged=(e)=>{
     }
     return (
         <ul>
-          {suggestions.map((item)=><li onClick={()=>this.suggestionSelected(item)}  >{item}</li>)}
+          {suggestions.map((item)=><li onClick={()=>this.suggestionSelected(item)}  > <Link to= {"/contest/"+this.CC} >  {item} </Link> </li>)}
         </ul>
     ) 
   }
@@ -103,6 +106,9 @@ console.log(value);
 console.log(this.idMap[value.text]);
 var v = this.idMap[value.text];
 this.state.FC = v;
+this.CC = this.state.FC;
+console.log("HEY")
+console.log(this.CC);
 }
 
     render() {
@@ -118,9 +124,12 @@ this.state.FC = v;
     <div>
        
     <input value={text} onChange ={this.onTextChanged} type="text" placeholder="       Search . . ." required  />
+
       {this.renderSuggestions()}
      <p> {this.setText({text})}</p>
         <p>{this.state.FC}</p>
+        
+        {/* <Contest text = {this.state.FC} /> */}
     </div>
   </div>
 </div>
