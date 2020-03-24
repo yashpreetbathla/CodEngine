@@ -16,7 +16,7 @@ CC='1';
     fetch('https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder', {
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer a1a89425454ad6240347ed0ed3532d7d515e754f'
+          'Authorization': 'Bearer a1303845541e18ff0023e765c348d5c26b714027'
       },
       method: 'GET'
   })
@@ -141,10 +141,10 @@ isDisabled() {
      <p> {this.setText({text})}</p>
           
         {/* <p>{this.state.FC}</p> */}
-        <div>
-        {this.isDisabled()?<button type="submit"  
-         disabled={this.isDisabled()}><Link to= {"/contest/"+ this.state.FC } >CLICKK MEEEE</Link></button>:<button type="submit"  
-         disabled={this.isDisabled()}><Link  >CLICKK MEEEE</Link></button>}
+        <div className="container-click">
+        {this.isDisabled()?<button type="submit" className="click-button" 
+         disabled={this.isDisabled()}><Link to= {"/contest/"+ this.state.FC  } className="click">Search</Link></button>:<button type="submit" className="click-button"
+         disabled={this.isDisabled()}><Link className="click" >Search</Link></button>}
         
         {/* <Contest text = {this.state.FC} /> */}
         </div>
