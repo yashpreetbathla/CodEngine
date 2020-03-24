@@ -15,10 +15,12 @@ body {
   padding: 30px;
   text-align: center;
   background: white;
+  margin-right: 30px;
 }
 
 .header h1 {
   font-size: 50px;
+  margin-right: 30px;
 }
 
 /* Style the top navigation bar */
@@ -26,6 +28,7 @@ body {
   border-radius: 25px;
   overflow: hidden;
   background-color: #333;
+  margin-right: 40px;
 }
 
 /* Style the topnav links */
@@ -49,7 +52,7 @@ body {
 .leftcolumn {   
   border-radius: 25px;
   float: left;
-  width: 75%;
+  width: 73%;
 }
 
 /* Right column */
@@ -60,7 +63,8 @@ border-radius: 25px;
   background-color: #f1f1f1;
   padding-top: 20px;
   padding-left: 20px;
- 
+  padding-right: 20px;
+  margin-right: 35px;
 }
 
 /* Fake image */
@@ -77,6 +81,52 @@ border-radius: 25px;
   margin-top: 20px;
 margin-right: 20px;
 }
+.card2{
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+margin-right: 10px;
+}
+
+.rank{
+  height:200px;
+  width:400px;
+  overflow: scroll;
+  background-color:yellowgreen;
+  color:white;
+  scrollbar-base-color:gold;
+  font-family:sans-serif;
+  padding:20px;
+  margin: auto;
+  line-height:3em;
+  border:4px double #DEBB07;
+  overflow-y:auto;
+  overflow-x:auto;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+.rank2{
+  border-top-left-radius: 25px;
+  height:200px;
+  width:400px;
+  overflow-x: scroll;
+    overflow-y: auto;
+  background-color:rgb(6, 148, 148);
+  color:white;
+  scrollbar-base-color:gold;
+  font-family:sans-serif;
+  padding:20px;
+  margin: auto;
+  padding-right: 5px;
+  line-height:3em;
+  border:4px double #DEBB07;
+  padding-bottom: 50px;
+  margin-bottom: 20px;
+}
+
+
+
+
 
 /* Clear floats after the columns */
 .row:after {

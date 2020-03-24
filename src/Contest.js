@@ -4,6 +4,7 @@ import { RouteComponentProps, withRouter } from "react-router";
 import queryString from 'query-string';
 import {Link} from 'react-router-dom';
 import './Contest.css';
+import Rankings from './Rankings';
 class Contest extends Component {
   
     constructor(props){
@@ -24,7 +25,9 @@ class Contest extends Component {
         en : '',
         banner : '',
         announcements : '',
-        problemlist : []
+        problemlist : [],
+        rankings : [],
+        submissions:[]
       };
       this.setState({
         
@@ -32,7 +35,7 @@ class Contest extends Component {
       let response;
       fetch("https://api.codechef.com/contests/"+this.state.val+"?fields=&sortBy=&sortOrder=", {
   headers: {
-    Authorization: "Bearer a1303845541e18ff0023e765c348d5c26b714027"
+    Authorization: "Bearer fa365c0058a208051499c0f43ab2c31d28cbb15b"
   },
   method: 'GET'
 }).then(res => {
@@ -71,16 +74,109 @@ this.setState({
   done:true
   });
 // console.log(temp);
+
+
+
+
+
 console.log(this.state.problems);
 
 })
 .catch(err => {
   console.error(err)
 });
+// let response;
+
+                                                                      //RANKINGS
+
+
+    fetch("https://api.codechef.com/rankings/"+ this.state.val +"?fields=&country=&institution=&institutionType=&offset=&limit=&sortBy=&sortOrder=", {
+      headers: {
+        Authorization: "Bearer fa365c0058a208051499c0f43ab2c31d28cbb15b"
+      },
+      method: 'GET'
+    }).then(res => {
+        return res.json();
+    })
+    .then(res => {
+    
+        console.log(res);
+       response = res.result;
+       var parsedjson =  JSON.parse(JSON.stringify(response));
+// alert(parsedjson);
+console.log('HEYEGYGEYGBCY');
+console.log(parsedjson);
+
+var lst = [];
+for(let x of parsedjson['data']['content']){
+//   let resp;
+let a = {prank : x['rank'],
+pusername : x['username'],
+score : x['totalScore']};
+
+lst.push(a);
+}
+
+this.setState({
+
+  rankings : lst,
+  done:true
+  });
+
+    })
+    .catch(err => {
+        console.error(err)
+    });
+                                                                    //Submissions
+
+
+ fetch("https://api.codechef.com/submissions/?result=&year=&username=&language=&problemCode=&contestCode="+ this.state.val +"&fields=", {
+  headers: {
+    Authorization: "Bearer fa365c0058a208051499c0f43ab2c31d28cbb15b"
+  },
+  method: 'GET'
+}).then(res => {
+    return res.json();
+})
+.then(res => {
+
+    console.log(res);
+    response = res.result;
+    var parsedjson =  JSON.parse(JSON.stringify(response));
+    // alert(parsedjson);
+    console.log('submissions');
+    console.log(parsedjson);
+
+var lst = [];
+for(let x of parsedjson['data']['content']){
+//   let resp;
+let a = {problemcode : x['problemCode'],
+pusername : x['username'],
+result : x['result'],
+language:x['language']
+};
+
+lst.push(a);
+}
+
+this.setState({
+
+submissions : lst,
+done:true
+});
+
+})
+.catch(err => {
+    console.error(err)
+});
+
+
 
 
     }
    
+
+
     render() { 
       const {
         state: {
@@ -93,7 +189,9 @@ console.log(this.state.problems);
             en,
             banner,
             problemlist,
-            announcements
+            announcements,
+            rankings,
+            submissions
         }
     } = this;
         return (
@@ -136,7 +234,7 @@ console.log(this.state.problems);
 
 <React.Fragment>
             <ol>
-            <h1 style={{color:"green"}}> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{this.state.name} - ({this.state.code}) </h1>
+            <h1 style={{color:"green"}}> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{this.state.name} - ({this.state.code}) </h1>
             <h4 style={{color:"red"}}> Start Time : {st} - End Time : {en}</h4>
             </ol>
             <hr/>
@@ -172,20 +270,79 @@ console.log(this.state.problems);
   </div>
   <br/>
   <div className="rightcolumn">
-    <div className="card">
-      <h2 style={{color:"green"}}>About Me</h2>
-      <div className="fakeimg" style={{height:"100px"}}>Image</div>
-      <p style={{color:"green"}}>Some text about me in culpa qui officia deserunt mollit anim..</p>
-    </div>
-    <div className="card">
-      <h3 style={{color:"green"}}>Follow Me</h3>
+  <div className="card">
+      <h2 style={{color:"black",fontWeight: 'bold'}}>TIMER</h2>
       <p style={{color:"green"}}>Some text...</p>
     </div>
-    <div className="card">
-      <h3 style={{color:"green"}}>Popular Post</h3>
-      <div className="fakeimg"><p>Image</p></div>
-      <div className="fakeimg"><p>Image</p></div>
-      <div className="fakeimg"><p>Image</p></div>
+    <div >
+      <h2 style={{color:"black",fontWeight: 'bold'}}> &emsp;  &emsp;  &emsp;  &emsp; Rankings</h2>
+      <br/>
+  
+      {/* <div className="fakeimg" style={{height:"100px"}}>Image</div> */}
+      {/* <Rankings text={code} /> */}
+      <div className ="rank">
+        
+        <React.Fragment>
+       
+            <div>
+              <p style={{color:"black",fontWeight: 'bold'}}> Rank &emsp; Username   &emsp;  Score </p>
+              <hr/>
+            <ol>
+           
+            {rankings.map((prob, i) => (
+              <div>
+                
+              <ul style={{color:"black"}} key={i}>  &nbsp;&nbsp;{prob.prank} &emsp;&nbsp;&nbsp;&nbsp; {prob.pusername} &nbsp;&nbsp;&emsp;&nbsp;  {prob.score }
+              </ul>
+            
+              </div>
+            ))}
+          
+            </ol>
+            </div>
+            <hr/>
+            {/* <ol>
+          <p style={{color:"green"}}>Announcements</p>
+          <p style={{color:"black"}}>{announcements}</p>
+          </ol> */}
+          <hr/>
+          </React.Fragment>
+</div>
+    </div>
+   <br/>
+    <div>
+    <h2 style={{color:"black",fontWeight: 'bold'}}>  &emsp;  &emsp;  &emsp;  &emsp; Recent activity</h2>
+    <br/>
+   
+      <div className="rank2">
+      <React.Fragment>
+       
+       <div>
+         <p style={{color:"black",fontWeight: 'bold'}}> Username &emsp;  Problem &emsp; Result  &emsp; Lang </p>
+         <hr/>
+       <ol>
+      
+       {submissions.map((prob, i) => (
+         <div>
+           
+         <ul style={{color:"black"}} key={i}>{prob.pusername} &emsp;&nbsp;<Link to={ "/problem/"+prob.problemcode+"/contest/"+ code}> {prob.problemcode}</Link> &nbsp;&nbsp;&emsp;&nbsp;  {prob.result } &nbsp;&nbsp;&emsp;{prob.language.substring(0,3) }
+           
+           
+         </ul>
+       
+         </div>
+       ))}
+     
+       </ol>
+       </div>
+       <hr/>
+       {/* <ol>
+     <p style={{color:"green"}}>Announcements</p>
+     <p style={{color:"black"}}>{announcements}</p>
+     </ol> */}
+     <hr/>
+     </React.Fragment>
+      </div>
     </div>
     
         </div>

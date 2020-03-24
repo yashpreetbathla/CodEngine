@@ -16,7 +16,7 @@ CC='1';
     fetch('https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder', {
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer a1303845541e18ff0023e765c348d5c26b714027'
+          'Authorization': 'Bearer fa365c0058a208051499c0f43ab2c31d28cbb15b'
       },
       method: 'GET'
   })
