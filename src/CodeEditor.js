@@ -40,7 +40,7 @@ class CodeEditor extends Component {
 
     fetch("https://api.codechef.com/contests/"+str[6]+"/problems/"+str[4], {
       headers: {
-        Authorization: "Bearer 5678ddbc38e5c81f7a40194d532416936f9ca08f"
+        Authorization: "Bearer 3bcc74ad0b627d3096e5f79dd3a48f3a26b62eff"
       },
       method: "GET"
     }).then(res => {
@@ -112,7 +112,7 @@ this.setState({running:true,sub:false});
     fetch("https://api.codechef.com/ide/run", {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer 5678ddbc38e5c81f7a40194d532416936f9ca08f"
+        Authorization: "Bearer 3bcc74ad0b627d3096e5f79dd3a48f3a26b62eff"
       },
       method: "POST",
       body: JSON.stringify(payload)
@@ -141,7 +141,7 @@ this.setState({running:true,sub:false});
     if(this.state.running === true)
       fetch("https://api.codechef.com/ide/status?link=" + this.state.link, {
           headers: {
-            Authorization: "Bearer 5678ddbc38e5c81f7a40194d532416936f9ca08f"
+            Authorization: "Bearer 3bcc74ad0b627d3096e5f79dd3a48f3a26b62eff"
           },
           method: "GET"
         })

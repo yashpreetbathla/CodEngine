@@ -13,6 +13,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "html-react-parser": "^0.10.2",
+    "moment": "^2.24.0",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
     "query-string": "^6.11.1",

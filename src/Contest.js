@@ -5,6 +5,7 @@ import queryString from 'query-string';
 import {Link} from 'react-router-dom';
 import './Contest.css';
 import Rankings from './Rankings';
+import moment from 'moment'
 class Contest extends Component {
   
     constructor(props){
@@ -27,7 +28,8 @@ class Contest extends Component {
         announcements : '',
         problemlist : [],
         rankings : [],
-        submissions:[]
+        submissions:[],
+        ended: ''
       };
       this.setState({
         
@@ -35,7 +37,7 @@ class Contest extends Component {
       let response;
       fetch("https://api.codechef.com/contests/"+this.state.val+"?fields=&sortBy=&sortOrder=", {
   headers: {
-    Authorization: "Bearer 5678ddbc38e5c81f7a40194d532416936f9ca08f"
+    Authorization: "Bearer a2fa948c122051b97faae7661e4670af3371e69c"
   },
   method: 'GET'
 }).then(res => {
@@ -73,6 +75,37 @@ this.setState({
   problemlist : lst,
   done:true
   });
+  var self = this;
+  setInterval(()=>{
+    var tt = moment(self.state.en).diff(moment());
+    var st =moment(self.state.st).diff(moment());
+
+    if(tt<=0 && st<=0){
+      console.log('st'+st);
+      self.setState({ended:'ended'});
+    }
+   else if( tt>=0&& st<=0){
+    self.setState({ended:'run'});
+    self.setState({
+      h: moment.duration(moment(self.state.en).diff(moment())).hours(),
+      m: moment.duration(moment(self.state.en).diff(moment())).minutes(),
+      s: moment.duration(moment(self.state.en).diff(moment())).seconds(),
+    })
+   }
+   else if(st>0){
+    self.setState({ended:'begin'});
+    self.setState({
+      d: moment.duration(moment(self.state.st).diff(moment())).days(),
+      h: moment.duration(moment(self.state.st).diff(moment())).hours(),
+      m: moment.duration(moment(self.state.st).diff(moment())).minutes(),
+      s: moment.duration(moment(self.state.st).diff(moment())).seconds(),
+    })
+   }
+    console.log(moment(self.state.en).diff(moment()))
+    //-ve past data 
+    console.log(moment(self.state.st).diff(moment()))
+  
+  },1000);
 // console.log(temp);
 
 
@@ -92,7 +125,7 @@ console.log(this.state.problems);
 
     fetch("https://api.codechef.com/rankings/"+ this.state.val +"?fields=&country=&institution=&institutionType=&offset=&limit=&sortBy=&sortOrder=", {
       headers: {
-        Authorization: "Bearer 5678ddbc38e5c81f7a40194d532416936f9ca08f"
+        Authorization: "Bearer a2fa948c122051b97faae7661e4670af3371e69c"
       },
       method: 'GET'
     }).then(res => {
@@ -132,7 +165,7 @@ this.setState({
 
  fetch("https://api.codechef.com/submissions/?result=&year=&username=&language=&problemCode=&contestCode="+ this.state.val +"&fields=", {
   headers: {
-    Authorization: "Bearer 5678ddbc38e5c81f7a40194d532416936f9ca08f"
+    Authorization: "Bearer a2fa948c122051b97faae7661e4670af3371e69c"
   },
   method: 'GET'
 }).then(res => {
@@ -191,7 +224,9 @@ done:true
             problemlist,
             announcements,
             rankings,
-            submissions
+            submissions,
+            ended,
+            d
         }
     } = this;
         return (
@@ -235,7 +270,8 @@ done:true
 <React.Fragment>
             <ol>
             <h1 style={{color:"green"}}> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{this.state.name} - ({this.state.code}) </h1>
-            <h4 style={{color:"red"}}> Start Time : {st} - End Time : {en}</h4>
+            <h4 style={{color:"red"}}> Start Time : {st} - End Time : {en}
+             Difference:  {this.state.h}{this.state.m}{ this.state.s}</h4>
             </ol>
             <hr/>
             {/* <img src = '${banner}' /> */}
@@ -272,7 +308,22 @@ done:true
   <div className="rightcolumn">
   <div className="card">
       <h2 style={{color:"black",fontWeight: 'bold'}}>TIMER</h2>
-      <p style={{color:"green"}}>Some text...</p>
+      { ended === "begin" && <div>
+      <h5 style={{color:"black",fontWeight: 'bold'}}>Contest Begins In :- </h5>
+  <p style={{color:"black",fontWeight: 'bold'}}>   {this.state.d}  : {this.state.h} : {this.state.m} : { this.state.s} </p>
+
+      </div>   }
+      { ended === "run" &&<div>
+        <h5 style={{color:"black",fontWeight: 'bold'}}>Contest Ends In :- </h5>
+        <p style={{color:"black",fontWeight: 'bold'}}>   {this.state.h}:{this.state.m}:{ this.state.s} </p>
+        </div>
+      }
+      { ended === "ended" && <div>
+      <h4 style={{color:"black",fontWeight: 'bold'}}>Contest Ended :- </h4>
+      </div>
+
+      }
+      <p style={{color:"green"}}>   </p>
     </div>
     <div >
       <h2 style={{color:"black",fontWeight: 'bold'}}> &emsp;  &emsp;  &emsp;  &emsp; Rankings</h2>
