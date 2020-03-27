@@ -1,6 +1,11 @@
-body {
+.loginbackground{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
     color: #fff!important;;
-    background: linear-gradient(155deg, #55c7ed, #2797bd, #057ea7)!important;;
+    background: linear-gradient(155deg, #55c7ed, #2797bd, #057ea7)!important;
 }
 .form-control {
     min-height: 41px;

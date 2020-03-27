@@ -12,6 +12,7 @@ import 'brace/theme/monokai'
 import 'brace/theme/tomorrow'
 import 'brace/theme/github';
 import Parser from 'html-react-parser';
+
 class CodeEditor extends Component {
   code4 = "";
   constructor(props) {
@@ -30,7 +31,8 @@ class CodeEditor extends Component {
        customTC:"",
        statement : '',
        running:false,
-       sub:false
+       sub:false,
+       clicked:false
 
     };
 
@@ -40,7 +42,7 @@ class CodeEditor extends Component {
 
     fetch("https://api.codechef.com/contests/"+str[6]+"/problems/"+str[4], {
       headers: {
-        Authorization: "Bearer 3bcc74ad0b627d3096e5f79dd3a48f3a26b62eff"
+        Authorization: "Bearer 1ad79ff3eb9d9acbd19dcf386551d588cdd7dec9"
       },
       method: "GET"
     }).then(res => {
@@ -112,7 +114,7 @@ this.setState({running:true,sub:false});
     fetch("https://api.codechef.com/ide/run", {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer 3bcc74ad0b627d3096e5f79dd3a48f3a26b62eff"
+        Authorization: "Bearer 1ad79ff3eb9d9acbd19dcf386551d588cdd7dec9"
       },
       method: "POST",
       body: JSON.stringify(payload)
@@ -141,7 +143,7 @@ this.setState({running:true,sub:false});
     if(this.state.running === true)
       fetch("https://api.codechef.com/ide/status?link=" + this.state.link, {
           headers: {
-            Authorization: "Bearer 3bcc74ad0b627d3096e5f79dd3a48f3a26b62eff"
+            Authorization: "Bearer 1ad79ff3eb9d9acbd19dcf386551d588cdd7dec9"
           },
           method: "GET"
         })
@@ -209,6 +211,12 @@ this.setState({running:true,sub:false});
     handleChange2 = (e)=>{
         this.setState({theme:e.target.value});
     } 
+    myFunction = ()=>{
+      var bl = this.state.clicked;
+      if(bl === false) bl =true;
+      else bl = false;
+      this.setState({clicked:bl});
+    }
     render() {
       const {
         state: { codd, output ,stat,pcode,
@@ -222,83 +230,69 @@ this.setState({running:true,sub:false});
           running,
           sub,
           lang,
-          theme
+          theme,
+          clicked
             }
       } = this;
         return (
-            <div>
-                <div className="card" style={{borderRadius:"25px",color:"black"}}>
-                <h1>{pname} ({pcode})</h1>
-                    <p>Successful Submissions : {sucsub} <br></br>Total Submissions : {totsub}</p>
-                    <hr/>
-                    <em>{Parser(statement)}</em>
-                    <hr/>
+          <div>
+                <div className="card">
+                  <div className="qhead">
+                      <h1>{pname} ({pcode})</h1>
+                      <p>Successful Submissions : {sucsub} <br></br>Total Submissions : {totsub}</p>
+                  </div>
+                  <p className="question" style={{textAlign:"justify", textJustify: "inter-word", margin:"0px"}}>{Parser(statement)}</p>
+                  <div className="authdiv">
                     <p>Author : {auth}</p>
                     <p>Maximum Size Limit : {sizelt}</p>
                     <p>Maximum Time Limit : {timelt}</p>
-                    <hr/>
+                  </div>
                 </div>
                 <div className="codeeditor">
-                <h1>Using React-Ace</h1>
-              &emsp;&emsp;&emsp;&emsp; <select 
-                    value={lang} 
-                    onChange={this.handleChange1} 
-                >
-                <option value = "c_cpp">C++</option>
-                <option value = "java">Java</option>
-                <option value = "python">Python</option>
-                <option value = "javascript">Javascript</option>
-                <option value = "golang">Golang</option>
-                </select>
-                &emsp;&emsp;
-                <select 
-                    value={theme} 
-                    onChange={this.handleChange2} 
-                >
-                <option value = "monokai">Monokai</option>
-                <option value = "tomorrow">Tomorrow</option>
-                <option value = "github">Github</option>
-                </select>
+                  <h2>Problem Code : ({pcode})</h2>
+                  <select className="codelang" value={lang} onChange={this.handleChange1} >
+                    <option value = "c_cpp">C++</option>
+                    <option value = "java">Java</option>
+                    <option value = "python">Python</option>
+                    <option value = "javascript">Javascript</option>
+                    <option value = "golang">Golang</option>
+                  </select>
+                  <select className="codelang" value={theme} onChange={this.handleChange2} >
+                    <option value = "monokai">Monokai</option>
+                    <option value = "tomorrow">Tomorrow</option>
+                    <option value = "github">Github</option>
+                  </select>
+                  <AceEditor  style={{borderRadius:"25px",width:"80%", margin:"20px 10px 10px 10px"}} mode = {lang} theme = {theme} name="editor" value={codd} onChange={this.onChange} fontSize={19} editorProps={{$blockScrolling: true}} />
 
-                <AceEditor  style={{borderRadius:"25px",width:"95%"}}
-           mode = {lang}
-           theme = {theme}
-          name="editor"
-          value={codd}
-          onChange={this.onChange}
-          fontSize={19}
-          editorProps={{$blockScrolling: true}}
-        />
                 </div>
-                <div>
-                  <h2>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Custom Input</h2>
-                <textarea cols="50" rows="5" className="ta" value={this.state.customTC} onChange={this.handleCustomTC}  >
-
-  </textarea>  
-                <button className="button" onClick={this.handleClick}><span> Run </span></button>
-                <button className="button2" onClick={this.submit}> <span> Submit </span></button>
-                { 
-                        sub === true && <div className="card" style={{borderRadius:"25px",color:"black",fontSize:"30px",marginBottom:"25px"}}>
-          &emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   <span>&#9989;</span>
+                
+                <div className="cinput">
+                  <button className="button" onClick={this.handleClick}><span> Run </span></button>
+                  <button className="button2" onClick={this.submit}> <span> Submit </span></button>
+                  <input type="checkbox" onClick={this.myFunction}></input><label className="checkinput" >Custom Input</label>
+                  { clicked===true && <div>
+                  <textarea className="customtext" value={this.state.customTC} onChange={this.handleCustomTC}></textarea>
+                 </div>}
+                  {
+                        sub === true && <div className="card submitbox">   <span>&#9989;</span>
                            Submitted</div>
-                }
-                {output.mem === 0 && running === true &&<div className="card" style={{borderRadius:"25px",color:"black"}}>
-            
-                <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Running...
-
-                </div> }
-
-                { sub ===false && stat === true  && output.mem!==0 && <div className="card" style={{borderRadius:"25px",color:"black"}}>
-          <p> Status : </p> {output.status} <p> Date : </p>
-          {output.date} <p> Memory : </p>
-          {output.mem}
-          <br /> <p> Output : </p>
-          {output.op}
-        </div>}
-               
-    
+                  }
+                  {output.mem === 0 && running === true && <div className="card runnbox" style={{borderRadius:"25px",color:"black"}}>
+                    <div className="lds-roller">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                    <p style={{padding:"5% 0px 0px 40%"}}>Running...</p>
+                  </div> }
+                  { stat === true  && output.mem!==0 && <div className="card" style={{borderRadius:"25px",color:"black"}}> <p> Status : </p> {output.status} <p> Date : </p> {output.date} <p> Memory : </p> {output.mem} <br /> <p> Output : </p> {output.op} </div>}
                 </div>
+                <footer className = "foot">@CodEngine</footer>
             </div>
           );
     }

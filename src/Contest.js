@@ -37,7 +37,7 @@ class Contest extends Component {
       let response;
       fetch("https://api.codechef.com/contests/"+this.state.val+"?fields=&sortBy=&sortOrder=", {
   headers: {
-    Authorization: "Bearer a2fa948c122051b97faae7661e4670af3371e69c"
+    Authorization: "Bearer 562fec58e42e4fc68929edb05c8ffe430703467e"
   },
   method: 'GET'
 }).then(res => {
@@ -125,7 +125,7 @@ console.log(this.state.problems);
 
     fetch("https://api.codechef.com/rankings/"+ this.state.val +"?fields=&country=&institution=&institutionType=&offset=&limit=&sortBy=&sortOrder=", {
       headers: {
-        Authorization: "Bearer a2fa948c122051b97faae7661e4670af3371e69c"
+        Authorization: "Bearer 562fec58e42e4fc68929edb05c8ffe430703467e"
       },
       method: 'GET'
     }).then(res => {
@@ -165,7 +165,7 @@ this.setState({
 
  fetch("https://api.codechef.com/submissions/?result=&year=&username=&language=&problemCode=&contestCode="+ this.state.val +"&fields=", {
   headers: {
-    Authorization: "Bearer a2fa948c122051b97faae7661e4670af3371e69c"
+    Authorization: "Bearer 562fec58e42e4fc68929edb05c8ffe430703467e"
   },
   method: 'GET'
 }).then(res => {
@@ -230,14 +230,14 @@ done:true
         }
     } = this;
         return (
-          <div>
+          <div className="contestbackground">
             { this.state.done === true && <div>
             {/* <h1>{this.state.val}</h1> */}
-                <h1 style = {{alignSelf :"center"}}>  Farji CodeChef</h1>
-               <div className="header">
-  <h1 style={{color:"purple"}}>My Website</h1>
-  <p>Resize the browser window to see the effect.</p>
-</div>
+            <h1 style = {{alignSelf :"center"}}>  Farji CodeChef</h1>
+            <div className="header">
+              <h1 style={{color:"purple"}}>My Website</h1>
+              <p>Resize the browser window to see the effect.</p>
+          </div>
 
 <div className="topnav">
   <a href="#">Link</a>

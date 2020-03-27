@@ -2,12 +2,12 @@
   box-sizing: border-box;
 }
 
-body {
-  border-radius: 25px;
+.contestbackground{
   font-family: Arial;
   padding: 10px;
   background: linear-gradient(155deg, #55c7ed, #2797bd, #057ea7);
 }
+
 
 /* Header/Blog Title */
 .header {
