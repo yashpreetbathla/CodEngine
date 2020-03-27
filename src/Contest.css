@@ -109,8 +109,8 @@ margin-right: 10px;
   border-top-left-radius: 25px;
   height:200px;
   width:400px;
-  overflow-x: scroll;
-    overflow-y: auto;
+  border-bottom-left-radius: 25px;
+    overflow-y: scroll;
   background-color:rgb(6, 148, 148);
   color:white;
   scrollbar-base-color:gold;
@@ -121,7 +121,7 @@ margin-right: 10px;
   line-height:3em;
   border:4px double #DEBB07;
   padding-bottom: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 

@@ -7,6 +7,7 @@ import NewSearch from './NewSearch';
 import FinalSearch from './FinalSearch';
 import {BrowserRouter,Route,Switch,withRouter } from 'react-router-dom';
 import AutoCompleteText from './AutoCompleteText';
+import CodeEditor from './CodeEditor';
 
 
 class Codechef extends Component {
@@ -26,6 +27,7 @@ class Codechef extends Component {
             <Route path="/search" exact component={FinalSearch}/>
 
            <Route path={"/contest/:id"} component={Contest}/>
+           <Route path = {"/problem"} component = {CodeEditor}/>
            
             {/* <Search /> */}
             {/* <Contest /> */}

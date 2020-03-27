@@ -35,7 +35,7 @@ class Contest extends Component {
       let response;
       fetch("https://api.codechef.com/contests/"+this.state.val+"?fields=&sortBy=&sortOrder=", {
   headers: {
-    Authorization: "Bearer fa365c0058a208051499c0f43ab2c31d28cbb15b"
+    Authorization: "Bearer 5678ddbc38e5c81f7a40194d532416936f9ca08f"
   },
   method: 'GET'
 }).then(res => {
@@ -92,7 +92,7 @@ console.log(this.state.problems);
 
     fetch("https://api.codechef.com/rankings/"+ this.state.val +"?fields=&country=&institution=&institutionType=&offset=&limit=&sortBy=&sortOrder=", {
       headers: {
-        Authorization: "Bearer fa365c0058a208051499c0f43ab2c31d28cbb15b"
+        Authorization: "Bearer 5678ddbc38e5c81f7a40194d532416936f9ca08f"
       },
       method: 'GET'
     }).then(res => {
@@ -132,7 +132,7 @@ this.setState({
 
  fetch("https://api.codechef.com/submissions/?result=&year=&username=&language=&problemCode=&contestCode="+ this.state.val +"&fields=", {
   headers: {
-    Authorization: "Bearer fa365c0058a208051499c0f43ab2c31d28cbb15b"
+    Authorization: "Bearer 5678ddbc38e5c81f7a40194d532416936f9ca08f"
   },
   method: 'GET'
 }).then(res => {
