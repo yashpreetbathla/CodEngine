@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 class FinalSearch extends Component {
   idMap = {};
   items = [];
-CC='1';
+  CC='1';
   constructor(props){
     
     super(props);
@@ -16,7 +16,7 @@ CC='1';
     fetch('https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder', {
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer 562fec58e42e4fc68929edb05c8ffe430703467e'
+          'Authorization': 'Bearer 956f0e2731d661d3b8a57685161e5f78d4268b22'
       },
       method: 'GET'
   })
@@ -126,32 +126,39 @@ isDisabled() {
     render() {
         const {text} = this.state;
         return (  
-            <div>
-           {/* <div> <h1>{this.state.code}</h1>  </div> */}
-                <div className="flexbox">
+          <div className="finalsearchback">
+            <nav class="contestnav">
+              <ul>
+                <li><h2 style={{color:"white"}}>CodEngine</h2></li>
+              </ul>
+            </nav>
+            <div className="flexbox">
+              <div className = "search">
+                <h1>Search Contest</h1>
+                <h3>Click on search icon, to search for the contest</h3>
+                <div className="inputsearch">
+                  <input value={text} onChange ={this.onTextChanged} type="text" placeholder="       Search . . ." required  />
+                 
+                  <div className="container-click">  
+                  {
+                    this.isDisabled()?
+                    <button type="submit" className="click-button" disabled={this.isDisabled()}>
+                    <Link to= {"/contest/"+ this.state.FC} className="click">Search</Link>
+                    </button>:<button type="submit" className="click-button" disabled={this.isDisabled()}>
+                    <Link className="click" >Search</Link></button>
+                    
+                  }
                   
-  <div className = "search">
-    <h1>Search Contest</h1>
-    <h3>Click on search icon, then type your keyword.</h3>
-    <div>
-       
-    <input value={text} onChange ={this.onTextChanged} type="text" placeholder="       Search . . ." required  />
-    {/* <input type="button" value="Search"/> */}
-      {this.renderSuggestions()}
-     <p> {this.setText({text})}</p>
-          
-        {/* <p>{this.state.FC}</p> */}
-        <div className="container-click">
-        {this.isDisabled()?<button type="submit" className="click-button" 
-         disabled={this.isDisabled()}><Link to= {"/contest/"+ this.state.FC  } className="click">Search</Link></button>:<button type="submit" className="click-button"
-         disabled={this.isDisabled()}><Link className="click" >Search</Link></button>}
-        
-        {/* <Contest text = {this.state.FC} /> */}
-        </div>
-    </div>
-  </div>
-</div>
+                  </div>
+                  <div className="contestlist">
+                    {this.renderSuggestions()}
+                    {this.setText({text})}
+                  </div>
+                </div>
+              </div>
+              
             </div>
+          </div>
         );
     }
 }

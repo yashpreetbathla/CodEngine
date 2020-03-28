@@ -5,7 +5,8 @@ import queryString from 'query-string';
 import {Link} from 'react-router-dom';
 import './Contest.css';
 import Rankings from './Rankings';
-import moment from 'moment'
+import moment from 'moment';
+import Logo from './logo192.png';
 class Contest extends Component {
   
     constructor(props){
@@ -37,7 +38,7 @@ class Contest extends Component {
       let response;
       fetch("https://api.codechef.com/contests/"+this.state.val+"?fields=&sortBy=&sortOrder=", {
   headers: {
-    Authorization: "Bearer 562fec58e42e4fc68929edb05c8ffe430703467e"
+    Authorization: "Bearer 956f0e2731d661d3b8a57685161e5f78d4268b22"
   },
   method: 'GET'
 }).then(res => {
@@ -125,7 +126,7 @@ console.log(this.state.problems);
 
     fetch("https://api.codechef.com/rankings/"+ this.state.val +"?fields=&country=&institution=&institutionType=&offset=&limit=&sortBy=&sortOrder=", {
       headers: {
-        Authorization: "Bearer 562fec58e42e4fc68929edb05c8ffe430703467e"
+        Authorization: "Bearer 956f0e2731d661d3b8a57685161e5f78d4268b22"
       },
       method: 'GET'
     }).then(res => {
@@ -165,7 +166,7 @@ this.setState({
 
  fetch("https://api.codechef.com/submissions/?result=&year=&username=&language=&problemCode=&contestCode="+ this.state.val +"&fields=", {
   headers: {
-    Authorization: "Bearer 562fec58e42e4fc68929edb05c8ffe430703467e"
+    Authorization: "Bearer 956f0e2731d661d3b8a57685161e5f78d4268b22"
   },
   method: 'GET'
 }).then(res => {
@@ -176,7 +177,7 @@ this.setState({
     console.log(res);
     response = res.result;
     var parsedjson =  JSON.parse(JSON.stringify(response));
-    // alert(parsedjson);
+   
     console.log('submissions');
     console.log(parsedjson);
 
@@ -230,177 +231,134 @@ done:true
         }
     } = this;
         return (
-          <div className="contestbackground">
-            { this.state.done === true && <div>
-            {/* <h1>{this.state.val}</h1> */}
-            <h1 style = {{alignSelf :"center"}}>  Farji CodeChef</h1>
-            <div className="header">
-              <h1 style={{color:"purple"}}>My Website</h1>
-              <p>Resize the browser window to see the effect.</p>
-          </div>
+                <div className="contestbackground">
+                  { this.state.done === true && 
+                  <div>
+                    <nav class="contestnav">
+                      <ul>
+                        <li><h2 style={{color:"white"}}>CodEngine</h2></li>
+                      </ul>
+                    </nav>
 
-<div className="topnav">
-  <a href="#">Link</a>
-  <a href="#">Link</a>
-  <a href="#">Link</a>
-  <a href="#" style={{float:"right"}}>Link</a>
-</div>
+                    <div className="row">
+                      <h1 className="contesthead"> {this.state.name} - ({this.state.code}) </h1>
+                      <div className="timecontest">
+                        { ended === "begin" && 
+                              <div>
+                                <p style={{textAlign:"center", fontSize:"25px"}}>Contest Starts In:</p>
+                                <hr style={{borderTop: "2px solid black", margin: "0px 20% 0px 20%" }}/>
+                                <ul className="timer"> 
+                                  <li><span>{this.state.d}</span></li>
+                                  <li><span>{this.state.h}</span></li>
+                                  <li><span>{this.state.m}</span></li> 
+                                  <li><span>{ this.state.s}</span></li>
+                                </ul>
+                                <ul className="timerhead">
+                                  <li id="clock-hrs-left">Hrs</li>
+                                  <li id="clock-min-left">Min</li>
+                                  <li id="clock-sec-left">Sec</li> 
+                                </ul>
+                              </div>   
+                            }
+                            { ended === "run" &&
+                              <div>
+                                <p style={{textAlign:"center", fontSize:"25px"}}>Contest Ends In:</p>
+                                <hr style={{borderTop: "2px solid black", margin: "0px 20% 0px 20%" }}/>
+                                <ul className="timer"> 
+                                  <li ><span>{this.state.h}</span></li>
+                                  <li><span>{this.state.m}</span></li> 
+                                  <li><span>{ this.state.s}</span></li>
+                                </ul>
+                                <ul className="timerhead">
+                                  <li id="hrs-left">Hrs</li>
+                                  <li id="min-left">Min</li>
+                                  <li id="sec-left">Sec</li> 
+                                </ul>
+                              </div>    
+                            }
+                            { ended === "ended" && <div>
+                                <p style={{textAlign:"center", fontSize:"25px"}}>Contest Ended</p>
+                                <hr style={{borderTop: "2px solid black", margin: "0px 20% 0px 20%" }}/>
+                              </div>}
+                      </div>
+                      <div className="leftcolumn">
+                          <React.Fragment>
+                              <table className="problemtable">
+                                <tbody>
+                                  <tr>
+                                    <th>Problem</th>
+                                    <th>Submissions</th>
+                                    <th>Accuracy</th>
+                                  </tr>
+                                  {problemlist.map((prob, i) => (
+                                    <tr key={i}>
+                                      <td><Link className ='lst' to={ "/problem/"+prob.pcode+"/contest/"+ code}>{prob.pcode}</Link></td>
+                                      <td>{prob.ssub}</td>
+                                      <td>{prob.acc.toPrecision(3)}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                          </React.Fragment>
+                    
+                      </div>
+                      
+                      <div className="rightcolumn">
+                        <div >
+                          <h4 className="ranklist">Ranking</h4>
+                          <div className="rank">
+                            <React.Fragment>
+                                <table className="problemtable">
+                                  <tbody>
+                                    <tr>
+                                      <th>Rank</th>
+                                      <th>Username</th>
+                                      <th>Score</th>
+                                    </tr>
+                                  </tbody>
+                                  {rankings.map((prob, i) => (
+                                    <tr key={i}>
+                                      <td>{prob.prank}</td>
+                                      <td>{prob.pusername}</td>
+                                      <td>{prob.score }</td>
+                                    </tr>
+                                  ))}
+                                </table>
+                              </React.Fragment>
+                          </div>
+                        </div>
 
-<div className="row">
-  <div className="leftcolumn">
-    <div className="card" style={{borderRadius:"25px"}} >
-    {/* <h1 style={{color:"red"}}>HEY</h1>
-      <h2 style={{color:"red"}}>TITLE HEADING</h2>
-      <h5 style={{color:"red"}}>Title description, Dec 7, 2017</h5> */}
-      {/* <div className="fakeimg" style={{height:"200px"}} >Image</div> */}
-     
-      {/* {this.state.problems.map((problemDetails,index)=>(
-        <div>
-          <h2>YASH</h2>
-     
-          <h4>{problemDetails['data']['content']['problemName']}</h4>&nbsp;&nbsp;&nbsp;&nbsp;
-          <h4>{problemDetails['data']['content']['problemCode']}</h4>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <h4>{problemDetails['data']['content']['successfulSubmissions']}</h4>
-        </div>
-      ))
-
-      } */}
-
-<React.Fragment>
-            <ol>
-            <h1 style={{color:"green"}}> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{this.state.name} - ({this.state.code}) </h1>
-            <h4 style={{color:"red"}}> Start Time : {st} - End Time : {en}
-             Difference:  {this.state.h}{this.state.m}{ this.state.s}</h4>
-            </ol>
-            <hr/>
-            {/* <img src = '${banner}' /> */}
-            <div>
-            &emsp;&emsp;
-              <p style={{color:"green"}}> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   Problem &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  &emsp;&emsp;&emsp;   Submissions  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;     Accuracy</p>
-            <ol>
-            &emsp;&emsp;
-            {problemlist.map((prob, i) => (
-              <div>
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  &emsp;&emsp;&emsp;
-                
-              <ul style={{color:"black"}} key={i}>&emsp;&emsp;&emsp;&emsp;&emsp;  &emsp;&emsp;&emsp;<Link className ='lst' to={ "/problem/"+prob.pcode+"/contest/"+ code}
-            >{prob.pcode}</Link>  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; {prob.ssub}&emsp;&emsp;&emsp;&emsp;  &emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp; {prob.acc.toPrecision(3)}
-              </ul>
-            
-              </div>
-            ))}
-            &emsp;&emsp;
-            </ol>
-            </div>
-            <hr/>
-            {/* <ol>
-          <p style={{color:"green"}}>Announcements</p>
-          <p style={{color:"black"}}>{announcements}</p>
-          </ol> */}
-          <hr/>
-          </React.Fragment>
-      {/* <p style={{color:"red"}}>Some text..</p>
-      <p style={{color:"red"}}>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p> */}
-    </div>
-  </div>
-  <br/>
-  <div className="rightcolumn">
-  <div className="card">
-      <h2 style={{color:"black",fontWeight: 'bold'}}>TIMER</h2>
-      { ended === "begin" && <div>
-      <h5 style={{color:"black",fontWeight: 'bold'}}>Contest Begins In :- </h5>
-  <p style={{color:"black",fontWeight: 'bold'}}>   {this.state.d}  : {this.state.h} : {this.state.m} : { this.state.s} </p>
-
-      </div>   }
-      { ended === "run" &&<div>
-        <h5 style={{color:"black",fontWeight: 'bold'}}>Contest Ends In :- </h5>
-        <p style={{color:"black",fontWeight: 'bold'}}>   {this.state.h}:{this.state.m}:{ this.state.s} </p>
-        </div>
-      }
-      { ended === "ended" && <div>
-      <h4 style={{color:"black",fontWeight: 'bold'}}>Contest Ended :- </h4>
-      </div>
-
-      }
-      <p style={{color:"green"}}>   </p>
-    </div>
-    <div >
-      <h2 style={{color:"black",fontWeight: 'bold'}}> &emsp;  &emsp;  &emsp;  &emsp; Rankings</h2>
-      <br/>
-  
-      {/* <div className="fakeimg" style={{height:"100px"}}>Image</div> */}
-      {/* <Rankings text={code} /> */}
-      <div className ="rank">
-        
-        <React.Fragment>
-       
-            <div>
-              <p style={{color:"black",fontWeight: 'bold'}}> Rank &emsp; Username   &emsp;  Score </p>
-              <hr/>
-            <ol>
-           
-            {rankings.map((prob, i) => (
-              <div>
-                
-              <ul style={{color:"black"}} key={i}>  &nbsp;&nbsp;{prob.prank} &emsp;&nbsp;&nbsp;&nbsp; {prob.pusername} &nbsp;&nbsp;&emsp;&nbsp;  {prob.score }
-              </ul>
-            
-              </div>
-            ))}
-          
-            </ol>
-            </div>
-            <hr/>
-            {/* <ol>
-          <p style={{color:"green"}}>Announcements</p>
-          <p style={{color:"black"}}>{announcements}</p>
-          </ol> */}
-          <hr/>
-          </React.Fragment>
-</div>
-    </div>
-   <br/>
-    <div>
-    <h2 style={{color:"black",fontWeight: 'bold'}}>  &emsp;  &emsp;  &emsp;  &emsp; Recent activity</h2>
-    <br/>
-   
-      <div className="rank2">
-      <React.Fragment>
-       
-       <div>
-         <p style={{color:"black",fontWeight: 'bold'}}> Username &emsp;  Problem &emsp; Result  &emsp; Lang </p>
-         <hr/>
-       <ol>
-      
-       {submissions.map((prob, i) => (
-         <div>
-           
-         <ul style={{color:"black"}} key={i}>{prob.pusername} &emsp;&nbsp;<Link to={ "/problem/"+prob.problemcode+"/contest/"+ code}> {prob.problemcode}</Link> &nbsp;&nbsp;&emsp;&nbsp;  {prob.result } &nbsp;&nbsp;&emsp;{prob.language.substring(0,3) }
-           
-           
-         </ul>
-       
-         </div>
-       ))}
-     
-       </ol>
-       </div>
-       <hr/>
-       {/* <ol>
-     <p style={{color:"green"}}>Announcements</p>
-     <p style={{color:"black"}}>{announcements}</p>
-     </ol> */}
-     <hr/>
-     </React.Fragment>
-      </div>
-    </div>
-    
-        </div>
-            </div> 
-               </div>}
+                        <div>
+                          <h4 className="ranklist">Recent activity</h4>
+                          <div className="rank">
+                            <React.Fragment>
+                              <table className="problemtable">
+                                  <tbody>
+                                    <tr>
+                                      <th>Username</th>
+                                      <th>Problem</th>
+                                      <th>Result</th>
+                                      <th>Lang</th>
+                                    </tr>
+                                  </tbody>
+                                  {submissions.map((prob, i) => (
+                                    <tr key={i}>
+                                      <td>{prob.pusername}</td>
+                                      <td><Link to={ "/problem/"+prob.problemcode+"/contest/"+ code}> {prob.problemcode}</Link></td>
+                                      <td>{prob.result }</td>
+                                      <td>{prob.language.substring(0,3)}</td>
+                                    </tr>
+                                  ))}
+                              </table>
+                            </React.Fragment>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>}
                </div>
-          );
+        );
     }
 }
  

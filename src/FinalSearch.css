@@ -1,27 +1,24 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
-* {
-  font-family: Roboto, sans-serif!important;;
-  padding: 0;
-  margin: 0;
-}
-
-html, body {
+.finalsearchback{
   width: 100%;
   height: 100%;
 }
 
 .flexbox {
   background: linear-gradient(155deg, #55c7ed, #2797bd, #057ea7);
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+}
+
+.inputsearch{
+  margin-top: 5%;
 }
 
 .search {
-  margin: 293px;
+  margin: 200px 293px 293px 293px;
   vertical-align: center;
   align-items: center;
 }
@@ -83,7 +80,7 @@ html, body {
 
 .search > div > input:focus,
 .search > div > input:valid {
-  width: 250px;
+  width: 400px;
 }
 
 .click-button{
@@ -104,4 +101,58 @@ html, body {
   position:relative; 
   left:110%; 
   bottom: 45px;
+}
+
+.contestlist{
+  margin-top:0px;
+  background-color: white;
+  border-radius: 20px;
+  font-family:arial;
+}
+
+.contestlist ul{
+  list-style-type: none;
+  list-style:none;
+  max-height:215px;
+  margin:0px 5% 5% 5%;
+  padding:5% 5% 5% 0px;
+  overflow:auto;
+  text-indent:10px;
+}
+
+.contestlist ul li{
+  text-align: center;
+  line-height:25px;
+  cursor:pointer;
+  margin:2%;
+  padding:2%;
+  border-radius: 15px;
+  border:1px solid rgb(226, 223, 223);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  margin-top: 5%;
+  margin-bottom:5%;
+  background: #0091c2; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:rgb(199, 198, 198); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(150, 145, 145); 
+}
+
+.contestnav{
+  padding: 1% 0px 0.1% 3%;
+  width: 100%;
+  background-color:black;
 }

@@ -42,7 +42,7 @@ class CodeEditor extends Component {
 
     fetch("https://api.codechef.com/contests/"+str[6]+"/problems/"+str[4], {
       headers: {
-        Authorization: "Bearer 1ad79ff3eb9d9acbd19dcf386551d588cdd7dec9"
+        Authorization: "Bearer 956f0e2731d661d3b8a57685161e5f78d4268b22"
       },
       method: "GET"
     }).then(res => {
@@ -80,14 +80,15 @@ class CodeEditor extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (this.state.codd !== nextState.codd) {
       return false;
-    } else return true;
+    } 
+    else
+     return true;
   }
   handleClick() {
   //   console.log('language...')
   //  console.log(this.state.lang)
     if(this.state.lang === "c_cpp"){
       this.setState({lang:"C++14"});
- 
     }
     else if(this.state.lang === "python"){
       this.setState({lang:"PYTH 3.6"});
@@ -101,6 +102,7 @@ class CodeEditor extends Component {
     else if(this.state.lang === "goloang"){
       this.setState({lang:"GO"});
     } 
+
      var payload = {
       sourceCode: this.state.codd,
       language: this.state.lang,
@@ -114,7 +116,7 @@ this.setState({running:true,sub:false});
     fetch("https://api.codechef.com/ide/run", {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer 1ad79ff3eb9d9acbd19dcf386551d588cdd7dec9"
+        Authorization: "Bearer 956f0e2731d661d3b8a57685161e5f78d4268b22"
       },
       method: "POST",
       body: JSON.stringify(payload)
@@ -143,7 +145,7 @@ this.setState({running:true,sub:false});
     if(this.state.running === true)
       fetch("https://api.codechef.com/ide/status?link=" + this.state.link, {
           headers: {
-            Authorization: "Bearer 1ad79ff3eb9d9acbd19dcf386551d588cdd7dec9"
+            Authorization: "Bearer 956f0e2731d661d3b8a57685161e5f78d4268b22"
           },
           method: "GET"
         })
