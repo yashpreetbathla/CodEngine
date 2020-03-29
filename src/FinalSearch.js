@@ -11,12 +11,43 @@ class FinalSearch extends Component {
   constructor(props){
     
     super(props);
-    console.log('token fetch')
-    console.log(localStorage.getItem('aut_token'));
-    while(localStorage.getItem('aut_token') === null){
+    // console.log('token fetch')
+    // console.log(localStorage.getItem('aut_token'));
+    // while(localStorage.getItem('aut_token') === null){
       
-      console.log('token get')
+      // console.log('token get')
+    // }
+    this.yoyo();
+    var str = window.location.href;
+    try{
+      console.log("hey");
+      str = window.location.href.split("=")[1].split("&")[0];
     }
+    catch{
+      console.log('Catch')
+      window.location.href = "http://localhost:8000/index.php";
+    }
+    fetch(`http://localhost:8000/index.php/?code=${str}`,
+    {headers:{
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+      method: 'GET'
+    }) .then(res => {
+      return res.json();
+    })
+    .then(res=>{
+          // console.log(res);
+          var tk = res.access_token;
+          var rtk = res.refresh_token;
+          localStorage.setItem('aut_token', tk);
+          localStorage.setItem('ref_token', rtk);
+    }).catch(err=>{
+      console.log(err.response);
+    })
+
+    while(localStorage.getItem('aut_token') === null){}
+    
     let response;
     fetch('https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder', {
       headers: {
@@ -24,36 +55,88 @@ class FinalSearch extends Component {
           'Authorization': 'Bearer ' + localStorage.getItem('aut_token')
       },
       method: 'GET'
-  })
+      })
       .then(res => {
           return res.json();
       })
       .then(res => {
       
-          console.log(res);
-         response = res.result;
-         var parsedjson =  JSON.parse(JSON.stringify(response));
-  // alert(parsedjson);
-  console.log(parsedjson);
-  var getCode = parsedjson['data']['content']['contestList'].map(val => val.code)
-  var getName = parsedjson['data']['content']['contestList'].map(val => val.name)
-  var getNameCode = getCode.concat(getName);
-  this.items = getNameCode;
-  var getNameCode = getCode.concat(getName);
-  console.log(this.items);
-  for(let x of parsedjson['data']['content']['contestList']){
-    this.idMap[x.name] = x.code
-    this.idMap[x.code] = x.code
-  }
-  console.log(this.idMap);
-  this.setState({mapping: this.idMap});
-  var getStartDate = parsedjson['data']['content']['contestList'].map(val => val.startDate)
-  var getEndDate = parsedjson['data']['content']['contestList'].map(val => val.endDate)
-
-  
+        console.log(res);
+        response = res.result;
+        var parsedjson =  JSON.parse(JSON.stringify(response));
+        // alert(parsedjson);
+        console.log(parsedjson);
+        var getCode = parsedjson['data']['content']['contestList'].map(val => val.code)
+        var getName = parsedjson['data']['content']['contestList'].map(val => val.name)
+        var getNameCode = getCode.concat(getName);
+        this.items = getNameCode;
+        var getNameCode = getCode.concat(getName);
+        console.log(this.items);
+        for(let x of parsedjson['data']['content']['contestList']){
+          this.idMap[x.name] = x.code
+          this.idMap[x.code] = x.code
+        }
+        console.log(this.idMap);
+        this.setState({mapping: this.idMap});
+        var getStartDate = parsedjson['data']['content']['contestList'].map(val => val.startDate)
+        var getEndDate = parsedjson['data']['content']['contestList'].map(val => val.endDate)
       })
       .catch(err => {
-          console.error(err)
+        if(localStorage.getItem('ref_token') === null ){
+          window.location.href = "http://localhost:8000/index.php";
+        }else{
+          fetch(`http://localhost:8000/index.php/?ref_token=${localStorage.getItem('ref_token')}`,
+          {headers:{
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+          },
+            method: 'GET'
+          }) .then(res => {
+            return res.json();
+          })
+          .then(res=>{
+                var tk = res.access_token;
+                var rtk = res.refresh_token;
+                localStorage.setItem('aut_token', tk);
+                localStorage.setItem('ref_token', rtk);
+                let response;
+                fetch('https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder', {
+                  headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                      'Authorization': 'Bearer ' + localStorage.getItem('aut_token')
+                  },
+                  method: 'GET'
+                  })
+                  .then(res => {
+                      return res.json();
+                  })
+                  .then(res => {
+                  
+                    console.log(res);
+                    response = res.result;
+                    var parsedjson =  JSON.parse(JSON.stringify(response));
+                    // alert(parsedjson);
+                    console.log(parsedjson);
+                    var getCode = parsedjson['data']['content']['contestList'].map(val => val.code)
+                    var getName = parsedjson['data']['content']['contestList'].map(val => val.name)
+                    var getNameCode = getCode.concat(getName);
+                    this.items = getNameCode;
+                    var getNameCode = getCode.concat(getName);
+                    console.log(this.items);
+                    for(let x of parsedjson['data']['content']['contestList']){
+                      this.idMap[x.name] = x.code
+                      this.idMap[x.code] = x.code
+                    }
+                    console.log(this.idMap);
+                    this.setState({mapping: this.idMap});
+                    var getStartDate = parsedjson['data']['content']['contestList'].map(val => val.startDate)
+                    var getEndDate = parsedjson['data']['content']['contestList'].map(val => val.endDate)
+                  })
+                  .catch(err => {
+                    console.log(err);
+                  })
+          })
+        }
       });
   
     // console.log(this.items);
@@ -66,6 +149,11 @@ class FinalSearch extends Component {
     };
  
 }
+
+ yoyo(){
+   console.log('yoyo worked!!!!');
+ } 
+
 onTextChanged=(e)=>{
   const value = e.target.value;
   if(value.length === 0){
@@ -112,19 +200,7 @@ componentDidMount(){
   Code = Code.substring(1,Code.length-1);
   // alert(Code);
   
-  fetch(`https://340e3bb5.ngrok.io/index.php/?code=${Code}`,
-      {headers : {'Content-Type': 'application/x-www-form-urlencoded'},
-      method:'GET'})
-      .then(result =>{
-        return result.json();
-      })
-      .then(data=>{
-        console.log('data');
-      })
-      .catch(err=>{
-        console.log(err);
-        console.log(err.response);
-      })
+
   
   console.log(Code);
   this.setState({ code: Code });

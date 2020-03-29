@@ -5,11 +5,9 @@ import LUNCHTIME from './LUNCHTIME.jpg';
 class Login extends Component {
     constructor(props){
         super(props);
-        // alert(window.location.pathname);
-        localStorage.setItem('aut_token', '484f76157f4dcfd0a7822ac4752332d7e91d6884');
     }
         handleClick() {
-            window.location.href = "https://api.codechef.com/oauth/authorize?response_type=code&client_id=abc6c2ddbf6d18ee86fc3c25f5673bb1&state=xyz&redirect_uri=http://localhost:3000/search"
+            window.location.href = "http://localhost:8000/index.php";
           }
     render() { 
         return (  
