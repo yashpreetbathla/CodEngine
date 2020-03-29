@@ -4,7 +4,7 @@ import { RouteComponentProps, withRouter } from "react-router";
 import queryString from "query-string";
 import { Link } from "react-router-dom";
 import "./Contest.css";
-import Rankings from "./Rankings";
+import CodEngine from "./Codengine_white-cropped.png";
 import moment from "moment";
 import LUNCHTIME from "./LUNCHTIME.jpg";
 
@@ -71,6 +71,7 @@ class Contest extends Component {
         var check_parent = parsedjson["data"]["content"]["isParent"];
         var reso = response.data.content;
         this.setState({
+          bannner : reso["bannerFile"],
           st: moment(reso["startDate"]).diff(moment()),
           en: reso["endDate"],
         });
@@ -778,7 +779,7 @@ class Contest extends Component {
             <nav class="contestnav">
               <ul>
                 <li>
-                  <h2 style={{ color: "white" }}>CodEngine</h2>
+                <img className="logoimage" src={CodEngine} alt="logo" />
                 </li>
               </ul>
             </nav>
@@ -871,7 +872,7 @@ class Contest extends Component {
               </div>
               <div className="leftcolumn">
                 <div style={{ margin: "0px 5% 10% 0px" }}>
-                  <img className="contestimage" src={LUNCHTIME} alt="logo" />
+                  <img className="contestimage" src={banner} alt="logo" />
                 </div>
                 <React.Fragment>
                   <table
