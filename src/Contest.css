@@ -104,8 +104,15 @@
 .leftcolumn {   
   width: 56%;
   margin: 4% 0px 3% 5%;
-  padding: 5%;
-  background-color: rgb(226, 223, 223);
+  padding: 1%;
+  background-color: white;
+}
+
+.contestimage{
+  height: 70%;
+  width: 104%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,.8);
 }
 
 .problemtable{
@@ -113,6 +120,8 @@
   text-align: center;
   font-size: 1.2em;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 
@@ -149,9 +158,11 @@ ul.timer li{
   border-radius: 2px;
   text-align: center;
 }
-
+#clock-hrs-days{
+  margin:0px 0px 0px 27%;
+}
 #clock-hrs-left{
-  margin:0px 0px 0px 39%;
+  margin:0px 0px 0px 4%;
 }
 
 #clock-min-left{
@@ -199,13 +210,13 @@ ul.timerhead li{
 }
 
 .rank{
-  border: 1px solid rgb(197, 196, 196);
   height:500px;
   width:100%;
   font-family:sans-serif;
   margin-bottom: 10%;
   overflow-y:auto;
   overflow-x:auto;
+  border: 1px solid rgb(197, 196, 196);
 }
 
 /* Clear floats after the columns */

@@ -11,12 +11,17 @@ class FinalSearch extends Component {
   constructor(props){
     
     super(props);
-    
+    console.log('token fetch')
+    console.log(localStorage.getItem('aut_token'));
+    while(localStorage.getItem('aut_token') === null){
+      
+      console.log('token get')
+    }
     let response;
     fetch('https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder', {
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Bearer 956f0e2731d661d3b8a57685161e5f78d4268b22'
+          'Authorization': 'Bearer ' + localStorage.getItem('aut_token')
       },
       method: 'GET'
   })
@@ -50,7 +55,7 @@ class FinalSearch extends Component {
       .catch(err => {
           console.error(err)
       });
-    
+  
     // console.log(this.items);
     this.state={
       suggestions:[],
@@ -59,7 +64,7 @@ class FinalSearch extends Component {
       mapping:{},
       FC:''
     };
-  
+ 
 }
 onTextChanged=(e)=>{
   const value = e.target.value;
@@ -95,12 +100,31 @@ onTextChanged=(e)=>{
       text:value,
       suggestions:[]
     }));
+    
+    // window.location.href = "http://localhost:3000/contest/"+value
+
   }
 componentDidMount(){
+
   const values = queryString.parse(this.props.location.search)
   // alert(values.code) // CODE
   let Code = JSON.stringify(values.code);
+  Code = Code.substring(1,Code.length-1);
   // alert(Code);
+  
+  fetch(`https://340e3bb5.ngrok.io/index.php/?code=${Code}`,
+      {headers : {'Content-Type': 'application/x-www-form-urlencoded'},
+      method:'GET'})
+      .then(result =>{
+        return result.json();
+      })
+      .then(data=>{
+        console.log('data');
+      })
+      .catch(err=>{
+        console.log(err);
+        console.log(err.response);
+      })
   
   console.log(Code);
   this.setState({ code: Code });
@@ -127,7 +151,7 @@ isDisabled() {
         const {text} = this.state;
         return (  
           <div className="finalsearchback">
-            <nav class="contestnav">
+            <nav className="contestnav">
               <ul>
                 <li><h2 style={{color:"white"}}>CodEngine</h2></li>
               </ul>
@@ -138,7 +162,10 @@ isDisabled() {
                 <h3>Click on search icon, to search for the contest</h3>
                 <div className="inputsearch">
                   <input value={text} onChange ={this.onTextChanged} type="text" placeholder="       Search . . ." required  />
-                 
+                   <div className="contestlist">
+                    {this.renderSuggestions()}
+                    {this.setText({text})}
+                  </div>
                   <div className="container-click">  
                   {
                     this.isDisabled()?
@@ -150,10 +177,7 @@ isDisabled() {
                   }
                   
                   </div>
-                  <div className="contestlist">
-                    {this.renderSuggestions()}
-                    {this.setText({text})}
-                  </div>
+                
                 </div>
               </div>
               

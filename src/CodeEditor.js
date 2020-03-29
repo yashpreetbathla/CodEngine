@@ -39,10 +39,13 @@ class CodeEditor extends Component {
     var str = window.location.href.split('/');
         
      console.log(str);
-
+     while(localStorage.getItem('aut_token') === null){
+      
+      console.log('token get')
+    }
     fetch("https://api.codechef.com/contests/"+str[6]+"/problems/"+str[4], {
       headers: {
-        Authorization: "Bearer 956f0e2731d661d3b8a57685161e5f78d4268b22"
+        Authorization: "Bearer "+ localStorage.getItem('aut_token')
       },
       method: "GET"
     }).then(res => {
@@ -116,7 +119,7 @@ this.setState({running:true,sub:false});
     fetch("https://api.codechef.com/ide/run", {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer 956f0e2731d661d3b8a57685161e5f78d4268b22"
+        Authorization: "Bearer "+ localStorage.getItem('aut_token')
       },
       method: "POST",
       body: JSON.stringify(payload)
@@ -145,7 +148,7 @@ this.setState({running:true,sub:false});
     if(this.state.running === true)
       fetch("https://api.codechef.com/ide/status?link=" + this.state.link, {
           headers: {
-            Authorization: "Bearer 956f0e2731d661d3b8a57685161e5f78d4268b22"
+            Authorization: "Bearer "+ localStorage.getItem('aut_token')
           },
           method: "GET"
         })
@@ -276,8 +279,7 @@ this.setState({running:true,sub:false});
                   <textarea className="customtext" value={this.state.customTC} onChange={this.handleCustomTC}></textarea>
                  </div>}
                   {
-                        sub === true && <div className="card submitbox">   <span>&#9989;</span>
-                           Submitted</div>
+                        sub === true && <div className="card submitbox">   <span>&#9989;</span>Submitted</div>
                   }
                   {output.mem === 0 && running === true && <div className="card runnbox" style={{borderRadius:"25px",color:"black"}}>
                     <div className="lds-roller">
@@ -292,7 +294,7 @@ this.setState({running:true,sub:false});
                     </div>
                     <p style={{padding:"5% 0px 0px 40%"}}>Running...</p>
                   </div> }
-                  { stat === true  && output.mem!==0 && <div className="card" style={{borderRadius:"25px",color:"black"}}> <p> Status : </p> {output.status} <p> Date : </p> {output.date} <p> Memory : </p> {output.mem} <br /> <p> Output : </p> {output.op} </div>}
+                  { stat === true  && output.mem!==0 && <div className="codeoutput" style={{borderRadius:"25px",color:"black"}}> <p style={{fontWeight:"bold"}}> Status :  {output.status}</p><p style={{fontWeight:"bold"}}> Date :  {output.date}  </p><p style={{fontWeight:"bold"}}>Memory :  {output.mem} </p> <hr/> <p style={{fontWeight:"bold"}}> Output : </p> {output.op} </div>}
                 </div>
                 <footer className = "foot">@CodEngine</footer>
             </div>

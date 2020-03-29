@@ -104,7 +104,7 @@
 }
 
 .contestlist{
-  margin-top:0px;
+  margin-top:10%;
   background-color: white;
   border-radius: 20px;
   font-family:arial;
@@ -136,8 +136,8 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  margin-top: 5%;
-  margin-bottom:5%;
+  /* margin-top: 5%;
+  margin-bottom:5%; */
   background: #0091c2; 
 }
  

@@ -20,13 +20,27 @@
     border-radius: 2px;
 }
 .login-form {
-    width: 350px;
-    margin: 30px auto;
-    text-align: center;
+    background-color: white;
+    width: 50%;
+    height:50%;
+    margin: 5% auto;
+    /* text-align: center; */
+    color: black;
+    padding: 2% 4% 2% 4%;
+    border-radius: 30px;
+    box-shadow: 0 4px 6px 5px rgba(99, 98, 98, 0.8);
 }
-.login-form h2 {
-    margin: 170px 0 25px;
 
+.logoimage{
+    height: 30%;
+    width: 30%;
+    border-radius: 10px;
+    margin: 0px 0px 7% 34%; 
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,.8);
+  }
+
+.login-form h2 {
+    margin: 5% 8% 8% 8%;
 }
 #log {
     color: #7a7a7a;
@@ -37,11 +51,17 @@
     padding: 30px;
 }
 .login-form .btn {        
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
-    background: #bf00ff;
+    background: #40a0c0;
     border: none;
     outline: none !important;
+    padding: 2%;
+    width: 50%;
+    border-radius: 20px;
+    margin-left: 25%;
+    margin-bottom:5%;
+    box-shadow: 0 4px 6px -1px rgba(99, 98, 98, 0.8);
 }
 .login-form .btn:hover, .login-form .btn:focus {
     background: #0b5e96;

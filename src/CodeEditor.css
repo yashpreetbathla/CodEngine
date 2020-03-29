@@ -40,6 +40,16 @@ body{
   padding: 2% 16% 1% 15%;
 }
 
+.codeoutput{
+  text-align: justify;
+  background-color: #b3e5d2;
+    font-size: 20px;
+    line-height: 1.5em;
+    width: 50%;
+    margin: 10% 8% 3% 12%;
+    padding: 3% 5% 3% 4%;
+}
+
 .qhead{
   border-radius: 20px;
   /* margin: 10px; */
