@@ -310,3 +310,8 @@ span {
   font-family: sans-serif;
   padding: 1% 50% 1% 45%;
 }
+.CodeeditorNav{
+  padding: 1% 0px 0.1% 3%;
+  width: 100%;
+  background-color:black;
+}

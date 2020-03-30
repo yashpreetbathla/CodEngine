@@ -3,6 +3,7 @@
 .finalsearchback{
   width: 100%;
   height: 100%;
+  position: fixed;
 }
 
 .flexbox {
@@ -11,6 +12,8 @@
   justify-content: center;
   align-items: center;
   position: fixed;
+  height:100%;
+  width:100%;
 }
 
 .inputsearch{
@@ -46,7 +49,7 @@
   height: 22px;
   position: absolute;
   top: 41px;
-  right: 39px;
+  right: 3px;
   transform: rotate(135deg);
   border-radius: 50px;
 }
@@ -80,7 +83,7 @@
 
 .search > div > input:focus,
 .search > div > input:valid {
-  width: 400px;
+  width: 600px;
 }
 
 .click-button{
@@ -113,7 +116,7 @@
 .contestlist ul{
   list-style-type: none;
   list-style:none;
-  max-height:215px;
+  max-height:250px;
   margin:0px 5% 5% 5%;
   padding:5% 5% 5% 0px;
   overflow:auto;
@@ -155,4 +158,9 @@
   padding: 1% 0px 0.1% 3%;
   width: 100%;
   background-color:black;
+}
+
+.searchimage{
+  width:15%;
+  height:15%;
 }

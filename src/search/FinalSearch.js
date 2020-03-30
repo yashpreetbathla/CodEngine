@@ -263,7 +263,7 @@ class FinalSearch extends Component {
         <nav className="contestnav">
           <ul>
             <li>
-            <img className="logoimage" src={CodEngine} alt="logo" />
+            <img className="searchimage" src={CodEngine} alt="logo" />
             </li>
           </ul>
         </nav>

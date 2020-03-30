@@ -13,6 +13,13 @@
   background-color:black;
 }
 
+.contestlogo{
+  
+    width:15%;
+    height:15%;
+  
+}
+
 /* .contestnav ul{
   margin: 0;
   padding: 0;
@@ -137,7 +144,7 @@
 }
 
 .timer{
-  margin: 5% 0px 1% 25%;
+  margin: 5% 0px 1% 15%;
 }
 
 ul.timer li{
@@ -159,7 +166,7 @@ ul.timer li{
   text-align: center;
 }
 #clock-hrs-days{
-  margin:0px 0px 0px 27%;
+  margin:0px 0px 0px 18%;
 }
 #clock-hrs-left{
   margin:0px 0px 0px 4%;
@@ -248,4 +255,13 @@ ul.timerhead li{
     float: none;
     width: 100%;
   }
+}
+
+.foot{
+  margin-top: 100px;
+  background-color:rgb(78, 70, 70);
+  font-size: 20px;
+  color: white;
+  font-family: sans-serif;
+  padding: 1% 50% 1% 45%;
 }

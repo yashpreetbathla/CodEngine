@@ -22,7 +22,7 @@
 .login-form {
     background-color: white;
     width: 50%;
-    height:50%;
+    height:40%;
     margin: 5% auto;
     /* text-align: center; */
     color: black;
@@ -32,11 +32,11 @@
 }
 
 .logoimage{
-    height: 30%;
-    width: 30%;
+    height: 50%;
+    width: 100%;
     border-radius: 10px;
-    margin: 0px 0px 7% 34%; 
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,.8);
+    margin: 0px 0px 7% 1%; 
+    box-shadow: 2px 4px 6px 3px rgba(83, 82, 82, 0.8);
   }
 
 .login-form h2 {
@@ -60,7 +60,7 @@
     width: 50%;
     border-radius: 20px;
     margin-left: 25%;
-    margin-bottom:5%;
+    margin-top:3%;
     box-shadow: 0 4px 6px -1px rgba(99, 98, 98, 0.8);
 }
 .login-form .btn:hover, .login-form .btn:focus {

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "./Contest.css";
 import CodEngine from "./Codengine_white-cropped.png";
 import moment from "moment";
-import LUNCHTIME from "./LUNCHTIME.jpg";
+
 
 class Contest extends Component {
   constructor(props) {
@@ -779,7 +779,7 @@ class Contest extends Component {
             <nav class="contestnav">
               <ul>
                 <li>
-                <img className="logoimage" src={CodEngine} alt="logo" />
+                <img className="contestlogo" src={CodEngine} alt="logo" />
                 </li>
               </ul>
             </nav>
@@ -974,6 +974,7 @@ class Contest extends Component {
             </div>
           </div>
         )}
+          <footer className="foot">@CodEngine</footer>
       </div>
     );
   }

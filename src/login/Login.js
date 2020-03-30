@@ -30,7 +30,7 @@ class Login extends Component {
         <br />
         <br />
         <div className="login-form" style={{ float: "center" }}>
-          <h2 className="text-center">Welcome to CodEngine!</h2>
+          
           <div style={{}}>
             <img className="logoimage" src={CodEngine} alt="logo" />
           </div>

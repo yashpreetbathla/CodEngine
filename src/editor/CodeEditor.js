@@ -274,6 +274,13 @@ class CodeEditor extends Component {
     } = this;
     return (
       <div>
+        <nav class="CodeeditorNav">
+              <ul>
+                <li>
+                <img className="contestlogo" src={CodEngine} alt="logo" />
+                </li>
+              </ul>
+            </nav>
         <div className="card">
           <div className="qhead">
             <h1>
