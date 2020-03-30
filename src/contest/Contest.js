@@ -972,9 +972,10 @@ class Contest extends Component {
                 </div>
               </div>
             </div>
+            <footer className="foot">@CodEngine</footer>
           </div>
         )}
-          <footer className="foot">@CodEngine</footer>
+       
       </div>
     );
   }
