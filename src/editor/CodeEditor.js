@@ -11,6 +11,7 @@ import "brace/mode/golang";
 import "brace/theme/monokai";
 import "brace/theme/tomorrow";
 import "brace/theme/github";
+import CodEngine from "./Codengine_white-cropped.png";
 import Parser from "html-react-parser";
 
 class CodeEditor extends Component {
