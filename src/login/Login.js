@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import "./Login.css";
 import LUNCHTIME from "./LUNCHTIME.jpg";
 import CodEngine from "./Codengine-cropped.png";
+import * as URL from '../config.js';
 class Login extends Component {
   constructor(props) {
     super(props);
   }
   handleClick() {
-    window.location.href = "https://code-engine-server.herokuapp.com/";
+    console.log(URL.default.url);
+    window.location.href = URL.default.url;
   }
   render() {
     return (

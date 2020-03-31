@@ -5,6 +5,7 @@ import queryString from "query-string";
 import { Link } from "react-router-dom";
 import "./Contest.css";
 import CodEngine from "./Codengine_white-cropped.png";
+import * as URL from '../config.js';
 import moment from "moment";
 
 
@@ -731,9 +732,9 @@ class Contest extends Component {
       })
       .catch((err) => {
         if(localStorage.getItem('ref_token') === null ){
-          window.location.href = "https://code-engine-server.herokuapp.com/";
+          window.location.href = URL.default.url;
         }else{
-          fetch(`https://code-engine-server.herokuapp.com/?ref_token=${localStorage.getItem('ref_token')}`,
+          fetch( URL.default.url +`?ref_token=${localStorage.getItem('ref_token')}`,
           {headers:{
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json'

@@ -5,6 +5,7 @@ import queryString from "query-string";
 import Contest from "../contest/Contest";
 import { Link } from "react-router-dom";
 import CodEngine from "./Codengine_white-cropped.png";
+import * as URL from '../config.js';
 class FinalSearch extends Component {
   idMap = {};
   items = [];
@@ -24,10 +25,10 @@ class FinalSearch extends Component {
       str = window.location.href.split("=")[1].split("&")[0];
     } catch {
       console.log("Catch");
-      window.location.href = "https://code-engine-server.herokuapp.com/";
+      window.location.href = URL.default.url;
     }
   
-    fetch(`https://code-engine-server.herokuapp.com/?code=${str}`, {
+    fetch(URL.default.url+ `?code=${str}`, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Accept: "application/json",
@@ -95,10 +96,10 @@ class FinalSearch extends Component {
       })
       .catch((err) => {
         if (localStorage.getItem("ref_token") === null) {
-          window.location.href = "https://code-engine-server.herokuapp.com/";
+          window.location.href = URL.default.url;
         } else {
           fetch(
-            `https://code-engine-server.herokuapp.com/?ref_token=${localStorage.getItem(
+            URL.default.url+`?ref_token=${localStorage.getItem(
               "ref_token"
             )}`,
             {
