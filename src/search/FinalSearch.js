@@ -24,9 +24,10 @@ class FinalSearch extends Component {
       str = window.location.href.split("=")[1].split("&")[0];
     } catch {
       console.log("Catch");
-      window.location.href = "http://localhost:8000/index.php";
+      window.location.href = "https://code-engine-server.herokuapp.com/";
     }
-    fetch(`http://localhost:8000/index.php/?code=${str}`, {
+    
+    fetch(`https://code-engine-server.herokuapp.com/?code=${str}`, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Accept: "application/json",
@@ -94,10 +95,10 @@ class FinalSearch extends Component {
       })
       .catch((err) => {
         if (localStorage.getItem("ref_token") === null) {
-          window.location.href = "http://localhost:8000/index.php";
+          window.location.href = "https://code-engine-server.herokuapp.com/";
         } else {
           fetch(
-            `http://localhost:8000/index.php/?ref_token=${localStorage.getItem(
+            `https://code-engine-server.herokuapp.com/?ref_token=${localStorage.getItem(
               "ref_token"
             )}`,
             {

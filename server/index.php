@@ -76,8 +76,8 @@ function main(){
         'api_endpoint'=> 'https://api.codechef.com/',
         'authorization_code_endpoint'=> 'https://api.codechef.com/oauth/authorize',
         'access_token_endpoint'=> 'https://api.codechef.com/oauth/token',
-        'redirect_uri'=> 'http://localhost:3000/search',
-        'website_base_url' => 'http://localhost:3000/');
+        'redirect_uri'=> 'https://codengine.tech/search',
+        'website_base_url' => 'https://codengine.tech/');
 
     $oauth_details = array('authorization_code' => '',
         'access_token' => '',

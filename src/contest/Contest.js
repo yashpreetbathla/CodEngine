@@ -731,9 +731,9 @@ class Contest extends Component {
       })
       .catch((err) => {
         if(localStorage.getItem('ref_token') === null ){
-          window.location.href = "http://localhost:8000/index.php";
+          window.location.href = "https://code-engine-server.herokuapp.com/";
         }else{
-          fetch(`http://localhost:8000/index.php/?ref_token=${localStorage.getItem('ref_token')}`,
+          fetch(`https://code-engine-server.herokuapp.com/?ref_token=${localStorage.getItem('ref_token')}`,
           {headers:{
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json'

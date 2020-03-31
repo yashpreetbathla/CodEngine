@@ -7,7 +7,7 @@ class Login extends Component {
     super(props);
   }
   handleClick() {
-    window.location.href = "http://localhost:8000/index.php";
+    window.location.href = "https://code-engine-server.herokuapp.com/";
   }
   render() {
     return (
