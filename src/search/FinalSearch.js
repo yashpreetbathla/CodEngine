@@ -26,7 +26,7 @@ class FinalSearch extends Component {
       console.log("Catch");
       window.location.href = "https://code-engine-server.herokuapp.com/";
     }
-    
+  
     fetch(`https://code-engine-server.herokuapp.com/?code=${str}`, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
