@@ -18,10 +18,7 @@ class CodeEditor extends Component {
   code4 = "";
   constructor(props) {
     super(props);
-    // this.onChange = this.onChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-
-    // this.onChange = this.onChange.bind(this);
     this.state = {
       code: ``,
       codd: " // Write your code here ... ",
@@ -40,9 +37,7 @@ class CodeEditor extends Component {
   }
   getProblems() {
     var str = window.location.href.split("/");
-    while (localStorage.getItem("aut_token") === null) {
-      console.log("token get");
-    }
+    while (localStorage.getItem("aut_token") === null) {}
     fetch(
       "https://api.codechef.com/contests/" + str[6] + "/problems/" + str[4],
       {
@@ -57,12 +52,10 @@ class CodeEditor extends Component {
       })
       .then((res) => {
         let response = res.result;
-        console.log(res);
-        console.log(response);
 
         var parsedjson = JSON.parse(JSON.stringify(response));
         var parsedjson1 = parsedjson["data"]["content"];
-        console.log(parsedjson1);
+
         this.setState({
           pname: parsedjson1["problemName"],
           pcode: parsedjson1["problemCode"],
@@ -116,25 +109,15 @@ class CodeEditor extends Component {
     } else return true;
   }
   handleClick() {
-      console.log('language...')
-    //  console.log(this.state.lang)
     if (this.state.lang === "c_cpp") {
       this.setState({ lang: "C++14" });
-    }
-    else if (this.state.lang === "python")
-    {
+    } else if (this.state.lang === "python") {
       this.setState({ lang: "PYTH 3.6" });
-    } 
-    else if (this.state.lang === "java") 
-    {
+    } else if (this.state.lang === "java") {
       this.setState({ lang: "JAVA" });
-    } 
-    else if (this.state.lang === "javascript")
-    {
+    } else if (this.state.lang === "javascript") {
       this.setState({ lang: "JS" });
-    } 
-    else if (this.state.lang === "goloang") 
-    {
+    } else if (this.state.lang === "goloang") {
       this.setState({ lang: "GO" });
     }
 
@@ -161,12 +144,10 @@ class CodeEditor extends Component {
           return res.json();
         })
         .then((data) => {
-          console.log(JSON.stringify(data));
           response = data.result;
           var parsedjson = JSON.parse(JSON.stringify(response));
-          console.log(parsedjson["data"].link);
+
           var link = parsedjson["data"].link;
-          console.log(link);
 
           this.setState({ link: link });
           this.setopts();
@@ -187,15 +168,10 @@ class CodeEditor extends Component {
           return res.json();
         })
         .then((res) => {
-          console.log(res);
           var st = res.status;
-          console.log(st);
 
           let response = res.result;
           var parsedjson = JSON.parse(JSON.stringify(response));
-          // alert(parsedjson);
-          console.log("submissions");
-          console.log(parsedjson);
 
           let a = {
             status: st,
@@ -203,7 +179,7 @@ class CodeEditor extends Component {
             op: parsedjson["data"].output,
             mem: parsedjson["data"].memory,
           };
-          // console.log(a);
+
           this.setState({
             output: a,
             stat: true,
@@ -213,7 +189,6 @@ class CodeEditor extends Component {
               this.setopts();
             }, 20000);
           }
-          console.log(this.state.output);
         })
         .catch((err) => {
           console.error(err);
@@ -221,22 +196,14 @@ class CodeEditor extends Component {
   }
 
   onChange = (newValue) => {
-    // newValue.preventDefault();
-    console.log("change", newValue);
-    // this.sets(newValue)
-    // this.code4 = newValue;
     this.setState({
       codd: newValue,
     });
-    console.log(this.state.codd);
   };
   handleCustomTC = (e) => {
     this.setState({ customTC: e.target.value });
-    console.log(this.state.customTC);
   };
-  runCode() {
-    console.log("BUTTON RUN");
-  }
+  runCode() {}
   submit = () => {
     this.setState({ sub: true, running: false });
   };
@@ -276,12 +243,12 @@ class CodeEditor extends Component {
     return (
       <div>
         <nav class="CodeeditorNav">
-              <ul>
-                <li>
-                <img className="contestlogo" src={CodEngine} alt="logo" />
-                </li>
-              </ul>
-            </nav>
+          <ul>
+            <li>
+              <img className="contestlogo" src={CodEngine} alt="logo" />
+            </li>
+          </ul>
+        </nav>
         <div className="card">
           <div className="qhead">
             <h1>
@@ -300,7 +267,6 @@ class CodeEditor extends Component {
               margin: "0px",
             }}
           >
-            
             {Parser(statement)}
           </p>
           <div className="authdiv">
@@ -410,6 +376,5 @@ class CodeEditor extends Component {
   }
 }
 const data = `function onLoad(editor) {
-  console.log("I've loaded!");
 }`;
 export default CodeEditor;

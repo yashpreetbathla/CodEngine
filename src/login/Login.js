@@ -8,9 +8,8 @@ class Login extends Component {
     super(props);
   }
   handleClick() {
-    console.log(URL.default.url);
     window.location.href = URL.default.url;
-  }
+     }
   render() {
     return (
       <div className="loginbackground">
@@ -37,7 +36,7 @@ class Login extends Component {
             <img className="logoimage" src={CodEngine} alt="logo" />
           </div>
           <div className="form-group">
-            {/* <form  > */}
+         
             <div className="log">
               <button
                 type="submit"
@@ -47,9 +46,7 @@ class Login extends Component {
                 Sign in
               </button>
             </div>
-            {/* </form> */}
-            {/* <button type="submit" className="btn btn-primary btn-lg btn-block" onclick="https://api.codechef.com/oauth/authorize?response_type=code&client_id=abc6c2ddbf6d18ee86fc3c25f5673bb1&state=xyz&redirect_uri=http://localhost:3000/">Sign in</button> */}
-          </div>
+               </div>
         </div>
       </div>
     );

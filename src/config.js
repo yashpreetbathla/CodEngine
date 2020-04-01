@@ -1,5 +1,4 @@
-let url = 'https://code-engine-server.herokuapp.com/';
-// let url ='https://code-engine-server.herokuapp.com/';
-let url_host= 'http://localhost:3000/';
+//Server hosted at this location
+let url = 'https://codengineserver.000webhostapp.com/';
 
-export default {url,url_host};
+export default {url};
