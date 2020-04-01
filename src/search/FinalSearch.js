@@ -11,7 +11,13 @@ class FinalSearch extends Component {
   CC = "1";
   constructor(props) {
     super(props);
-
+    this.state = {
+      suggestions: [],
+      text: "",
+      code: "",
+      mapping: {},
+      FC: "",
+    };
     var str = window.location.href;
     try {
       str = window.location.href.split("=")[1].split("&")[0];
@@ -32,135 +38,133 @@ class FinalSearch extends Component {
       .then((res) => {
         var tk = res.access_token;
         var rtk = res.refresh_token;
+        // console.log(tk);
+       if(tk !== null){
         localStorage.setItem("aut_token", tk);
         localStorage.setItem("ref_token", rtk);
-
-        let response;
-        fetch(
-          "https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder",
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-              Authorization: "Bearer " + localStorage.getItem("aut_token"),
-            },
-            method: "GET",
-          }
-        )
-          .then((res) => {
-            return res.json();
-          })
-          .then((res) => {
-            response = res.result;
-            var parsedjson = JSON.parse(JSON.stringify(response));
-
-            var getCode = parsedjson["data"]["content"]["contestList"].map(
-              (val) => val.code
-            );
-            var getName = parsedjson["data"]["content"]["contestList"].map(
-              (val) => val.name
-            );
-            var getNameCode = getCode.concat(getName);
-            this.items = getNameCode;
-            var getNameCode = getCode.concat(getName);
-
-            for (let x of parsedjson["data"]["content"]["contestList"]) {
-              this.idMap[x.name] = x.code;
-              this.idMap[x.code] = x.code;
-            }
-
-            this.setState({ mapping: this.idMap });
-            var getStartDate = parsedjson["data"]["content"]["contestList"].map(
-              (val) => val.startDate
-            );
-            var getEndDate = parsedjson["data"]["content"]["contestList"].map(
-              (val) => val.endDate
-            );
-          })
-          .catch((err) => {
-            if (localStorage.getItem("ref_token") === null) {
-              window.location.href = URL.default.url;
-            } else {
-              fetch(
-                URL.default.url +
-                  `?ref_token=${localStorage.getItem("ref_token")}`,
-                {
-                  headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    Accept: "application/json",
-                  },
-                  method: "GET",
-                }
-              )
-                .then((res) => {
-                  return res.json();
-                })
-                .then((res) => {
-                  var tk = res.access_token;
-                  var rtk = res.refresh_token;
-                  localStorage.setItem("aut_token", tk);
-                  localStorage.setItem("ref_token", rtk);
-                  let response;
-                  fetch(
-                    "https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder",
-                    {
-                      headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                        Authorization:
-                          "Bearer " + localStorage.getItem("aut_token"),
-                      },
-                      method: "GET",
-                    }
-                  )
-                    .then((res) => {
-                      return res.json();
-                    })
-                    .then((res) => {
-                      response = res.result;
-                      var parsedjson = JSON.parse(JSON.stringify(response));
-
-                      var getCode = parsedjson["data"]["content"][
-                        "contestList"
-                      ].map((val) => val.code);
-                      var getName = parsedjson["data"]["content"][
-                        "contestList"
-                      ].map((val) => val.name);
-                      var getNameCode = getCode.concat(getName);
-                      this.items = getNameCode;
-                      var getNameCode = getCode.concat(getName);
-
-                      for (let x of parsedjson["data"]["content"][
-                        "contestList"
-                      ]) {
-                        this.idMap[x.name] = x.code;
-                        this.idMap[x.code] = x.code;
-                      }
-
-                      this.setState({ mapping: this.idMap });
-                      var getStartDate = parsedjson["data"]["content"][
-                        "contestList"
-                      ].map((val) => val.startDate);
-                      var getEndDate = parsedjson["data"]["content"][
-                        "contestList"
-                      ].map((val) => val.endDate);
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
-                });
-            }
-          });
+       } 
+      
+      
       })
       .catch((err) => {
         console.log(err.response);
       });
+          
+      let response;
+      fetch(
+        "https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder",
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: "Bearer " + localStorage.getItem("aut_token"),
+          },
+          method: "GET",
+        }
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          response = res.result;
+          var parsedjson = JSON.parse(JSON.stringify(response));
 
-    this.state = {
-      suggestions: [],
-      text: "",
-      code: "",
-      mapping: {},
-      FC: "",
-    };
+          var getCode = parsedjson["data"]["content"]["contestList"].map(
+            (val) => val.code
+          );
+          var getName = parsedjson["data"]["content"]["contestList"].map(
+            (val) => val.name
+          );
+          var getNameCode = getCode.concat(getName);
+          this.items = getNameCode;
+          var getNameCode = getCode.concat(getName);
+
+          for (let x of parsedjson["data"]["content"]["contestList"]) {
+            this.idMap[x.name] = x.code;
+            this.idMap[x.code] = x.code;
+          }
+
+          this.setState({ mapping: this.idMap });
+          var getStartDate = parsedjson["data"]["content"]["contestList"].map(
+            (val) => val.startDate
+          );
+          var getEndDate = parsedjson["data"]["content"]["contestList"].map(
+            (val) => val.endDate
+          );
+        })
+        .catch((err) => {
+          if (localStorage.getItem("ref_token") === null) {
+            window.location.href = URL.default.url;
+          } else {
+            fetch(
+              URL.default.url +
+                `?ref_token=${localStorage.getItem("ref_token")}`,
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                  Accept: "application/json",
+                },
+                method: "GET",
+              }
+            )
+              .then((res) => {
+                return res.json();
+              })
+              .then((res) => {
+                var tk = res.access_token;
+                var rtk = res.refresh_token;
+                localStorage.setItem("aut_token", tk);
+                localStorage.setItem("ref_token", rtk);
+                let response;
+                fetch(
+                  "https://api.codechef.com/contests?fields=&status=&offset=&limit=&sortBy=&sortOrder",
+                  {
+                    headers: {
+                      "Content-Type": "application/x-www-form-urlencoded",
+                      Authorization:
+                        "Bearer " + localStorage.getItem("aut_token"),
+                    },
+                    method: "GET",
+                  }
+                )
+                  .then((res) => {
+                    return res.json();
+                  })
+                  .then((res) => {
+                    response = res.result;
+                    var parsedjson = JSON.parse(JSON.stringify(response));
+
+                    var getCode = parsedjson["data"]["content"][
+                      "contestList"
+                    ].map((val) => val.code);
+                    var getName = parsedjson["data"]["content"][
+                      "contestList"
+                    ].map((val) => val.name);
+                    var getNameCode = getCode.concat(getName);
+                    this.items = getNameCode;
+                    var getNameCode = getCode.concat(getName);
+
+                    for (let x of parsedjson["data"]["content"][
+                      "contestList"
+                    ]) {
+                      this.idMap[x.name] = x.code;
+                      this.idMap[x.code] = x.code;
+                    }
+
+                    this.setState({ mapping: this.idMap });
+                    var getStartDate = parsedjson["data"]["content"][
+                      "contestList"
+                    ].map((val) => val.startDate);
+                    var getEndDate = parsedjson["data"]["content"][
+                      "contestList"
+                    ].map((val) => val.endDate);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              });
+          }
+        });
+   
   }
 
   onTextChanged = (e) => {

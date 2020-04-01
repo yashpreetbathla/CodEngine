@@ -39,6 +39,7 @@ class Contest extends Component {
 
   getContest() {
     while (localStorage.getItem("aut_token") === null) {}
+    // console.log(localStorage.getItem("aut_token"));
     let response;
     fetch(
       "https://api.codechef.com/contests/" +
