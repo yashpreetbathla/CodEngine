@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import Contest from "../contest/Contest";
 import { Link } from "react-router-dom";
-import CodEngine from "./Codengine_white-cropped.png";
 import * as URL from "../config.js";
 class FinalSearch extends Component {
   idMap = {};
@@ -225,7 +224,7 @@ class FinalSearch extends Component {
         <nav className="contestnav">
           <ul>
             <li>
-              <img className="searchimage" src={CodEngine} alt="logo" />
+              <img className="searchimage" src="https://github.com/yashpreetbathla/Images/blob/master/Codengine_white-cropped.png?raw=true" alt="CodEngine" />
             </li>
           </ul>
         </nav>

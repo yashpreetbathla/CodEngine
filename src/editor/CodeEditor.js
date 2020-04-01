@@ -11,7 +11,6 @@ import "brace/mode/golang";
 import "brace/theme/monokai";
 import "brace/theme/tomorrow";
 import "brace/theme/github";
-import CodEngine from "./Codengine_white-cropped.png";
 import Parser from "html-react-parser";
 
 class CodeEditor extends Component {
@@ -245,7 +244,7 @@ class CodeEditor extends Component {
         <nav class="CodeeditorNav">
           <ul>
             <li>
-              <img className="contestlogo" src={CodEngine} alt="logo" />
+              <img className="contestlogo" src="https://github.com/yashpreetbathla/Images/blob/master/Codengine_white-cropped.png?raw=true" alt="CodEngine" />
             </li>
           </ul>
         </nav>

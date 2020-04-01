@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./Login.css";
-import LUNCHTIME from "./LUNCHTIME.jpg";
-import CodEngine from "./Codengine-cropped.png";
 import * as URL from '../config.js';
 class Login extends Component {
   constructor(props) {
@@ -33,7 +31,7 @@ class Login extends Component {
         <div className="login-form" style={{ float: "center" }}>
           
           <div style={{}}>
-            <img className="logoimage" src={CodEngine} alt="logo" />
+            <img className="logoimage" src="https://github.com/yashpreetbathla/Images/blob/master/Codengine-cropped.png?raw=true" alt="CodEngine" />
           </div>
           <div className="form-group">
          

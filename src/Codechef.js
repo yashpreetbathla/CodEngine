@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Login from "./login/Login";
 import Contest from "./contest/Contest";
 import FinalSearch from "./search/FinalSearch";
-import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch} from "react-router-dom";
 import CodeEditor from "./editor/CodeEditor";
 
 class Codechef extends Component {

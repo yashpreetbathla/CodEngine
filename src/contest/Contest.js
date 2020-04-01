@@ -3,7 +3,6 @@ import { RouteComponentProps, withRouter } from "react-router";
 import queryString from "query-string";
 import { Link } from "react-router-dom";
 import "./Contest.css";
-import CodEngine from "./Codengine_white-cropped.png";
 import * as URL from "../config.js";
 import moment from "moment";
 
@@ -707,7 +706,7 @@ class Contest extends Component {
             <nav class="contestnav">
               <ul>
                 <li>
-                  <img className="contestlogo" src={CodEngine} alt="logo" />
+                  <img className="contestlogo" src="https://github.com/yashpreetbathla/Images/blob/master/Codengine_white-cropped.png?raw=true" alt="CodEngine" />
                 </li>
               </ul>
             </nav>
@@ -800,7 +799,7 @@ class Contest extends Component {
               </div>
               <div className="leftcolumn">
                 <div style={{ margin: "0px 5% 10% 0px" }}>
-                  <img className="contestimage" src={banner} alt="logo" />
+                  <img className="contestimage" src={banner} alt="Contest Banner" />
                 </div>
                 <React.Fragment>
                   <table
