@@ -16,7 +16,7 @@ A modern, interactive online judge platform that leverages the CodeChef API to p
 
 ```mermaid
 graph TD
-    subgraph Frontend[Frontend Application (React)]
+    subgraph Frontend
         UI[User Interface]
         Auth[Authentication Module]
         Search[Contest Search Module]
@@ -24,13 +24,13 @@ graph TD
         Editor[Code Editor Module]
     end
 
-    subgraph Backend[Backend Services]
+    subgraph Backend
         API[CodeChef API Integration]
         EE[Execution Engine]
         DB[Data Processing]
     end
 
-    subgraph External[External Services]
+    subgraph External
         CodeChef[CodeChef API]
         Auth0[Authentication Service]
     end
