@@ -12,55 +12,91 @@ A modern, interactive online judge platform that leverages the CodeChef API to p
 - 🔄 Real-time code execution and output
 - 🏆 Contest participation and problem solving
 
-## 📋 Project Architecture
+## 🏗️ System Architecture
 
 ```mermaid
 graph TD
-    A[Frontend (React)] --> B[Authentication Module]
-    A --> C[Contest Search Module]
-    A --> D[Problem Display Module]
-    A --> E[Code Editor Module]
+    subgraph Frontend[Frontend Application (React)]
+        UI[User Interface]
+        Auth[Authentication Module]
+        Search[Contest Search Module]
+        Display[Problem Display Module]
+        Editor[Code Editor Module]
+    end
+
+    subgraph Backend[Backend Services]
+        API[CodeChef API Integration]
+        EE[Execution Engine]
+        DB[Data Processing]
+    end
+
+    subgraph External[External Services]
+        CodeChef[CodeChef API]
+        Auth0[Authentication Service]
+    end
+
+    %% Frontend Components
+    UI --> Auth
+    UI --> Search
+    UI --> Display
+    UI --> Editor
+
+    %% API Integration
+    Auth --> API
+    Search --> API
+    Display --> API
+    Editor --> EE
+
+    %% Backend Services
+    API --> CodeChef
+    API --> Auth0
+    EE --> DB
+    DB --> Editor
+
+    %% Data Flow
+    Auth --> UserAuth[User Authentication]
+    Search --> ContestData[Contest Data]
+    Display --> ProblemData[Problem Data]
+    Editor --> Execution[Code Execution]
+    Execution --> Output[Output Processing]
+
+    %% Styling
+    classDef frontend fill:#f9f,stroke:#333,stroke-width:2px
+    classDef backend fill:#bbf,stroke:#333,stroke-width:2px
+    classDef external fill:#bfb,stroke:#333,stroke-width:2px
     
-    B --> F[CodeChef API Integration]
-    C --> F
-    D --> F
-    E --> G[Execution Engine]
-    
-    F[CodeChef API Integration] --> H[User Authentication]
-    F --> I[Contest Data]
-    F --> J[Problem Data]
-    
-    G[Execution Engine] --> K[Code Execution]
-    G --> L[Output Processing]
+    class UI,Auth,Search,Display,Editor frontend
+    class API,EE,DB backend
+    class CodeChef,Auth0 external
 ```
 
 ## 📸 Screenshots
 
-### Home Page
+### 🏠 Home Page
 ![Home Page](Images/front-view.png)
 
-### Authentication
+### 🔐 Authentication
 ![Authentication](Images/Login-page.png)
 
-### Contest Search
+### 🔍 Contest Search
 ![Contest Search](Images/Search-page.png)
 
-### Contest Page
+### 📋 Contest Page
 ![Contest Page](Images/Contest-page.png)
 
-### Problem Statement
+### 📖 Problem Statement
 ![Problem Statement](Images/Problem-page.png)
 
-### Code Editor
+### 💻 Code Editor
 ![Code Editor](Images/Code-page.png)
 
-### Text Editor
+### 📝 Text Editor
 ![Text Editor](Images/Text-editor.png)
 
-### Input Page
+### 📥 Input Page
 ![Input Page](Images/Input-page.png)
 
-### Run Page
+### 🔄 Run Page
 ![Run Page](Images/Run-page.png)
 
 ## 🛠️ Tech Stack
